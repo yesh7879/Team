@@ -24,6 +24,9 @@ Our team is named R4L (R For Life). Our team's main goal for the course this sem
 
 My name is Jason Giblin. I am a junior from Chicago, Illinois studying Math and Economics. A question that I would like to know the answer to by analyzing data is if physically active students have more academic success in college as opposed to non-physically active students. After graduation, I would like to take an extended trip traveling around North America to climb in different locations. Further down the line, I would like to have a full time job working as an actuary for a health insurance company. Ideally I would like to have a job in Denver or Salt Lake City. My career accomplishment goals are modest, I would simply like to have a steady job with a good work-life balance that will allow me to climb and do other outdoor activities as much as possible. I hope to learn in this course how to program in R, and to get a base for computer programming. I hope to learn enough that I will be successful in my summer actuarial internship for the healthcare company Cigna. An interesting fact about me is that I love to rock climb, I often go on climbing trips on weekends to different climbing areas. 
 
+![](https://i.imgur.com/AmPAQPE.jpg)
+
+
 ### About YenTing
 
 My name is Yen-Ting Shen. I am a junior from Taipei, Taiwan majoring in business information management. A question what's the best place to eat in Boulder? I wouldl like to be a backpacker after my graduation and I wish I could work in a major company such as Google or Facebook as a data analyst. I hope the greatest career accomplishment will be a entrepreneur and successfully survive in this compativive world. I hope I can learn how to use R to analysis the data and be able to explain it to others. I want to buy the fried chicken restaurant Raising Cane's so I could go there to eat the fried chicken anytime I want!
@@ -53,6 +56,7 @@ My name is Baiyu Chen, I come from Foshan, China. About the question, I have a q
 ### Feedback for Jason
 
 ### Feedback for YenTing
+
 
 ### Feedback for Tiger
 
