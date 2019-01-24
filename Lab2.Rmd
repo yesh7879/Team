@@ -10,7 +10,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 ## About Team
-##                              Team Picture
+## Team Picture
 ![](https://i.imgur.com/O2gI3yq.jpg)
 
 Our team is named Team 2. Our team's main goal for the course this semester is to learn how to program in R effectively and to work together efficiently as a team. 
@@ -22,9 +22,17 @@ Our team is named Team 2. Our team's main goal for the course this semester is t
 My name is Jason Giblin. I am a junior from Chicago, Illinois studying Math and Economics. A question that I would like to know the answer to by analyzing data is if physically active students have more academic success in college as opposed to non-physically active students. After graduation, I would like to take an extended trip traveling around North America to climb in different locations. Further down the line, I would like to have a full time job working as an actuary for a health insurance company. Ideally I would like to have a job in Denver or Salt Lake City. My career accomplishment goals are modest, I would simply like to have a steady job with a good work-life balance that will allow me to climb and do other outdoor activities as much as possible. I hope to learn in this course how to program in R, and to get a base for computer programming. I hope to learn enough that I will be successful in my summer actuarial internship for the healthcare company Cigna. An interesting fact about me is that I love to rock climb, I often go on climbing trips on weekends to different climbing areas. 
 
 
-My name is Emery Schattinger and I am from Lakewood, Colorado. An interesting fact about my is that I am a triplet with two brothers the exact same age. One question that I would like to know the answer to would be if people who live at sea level live longer than people that live at 10,000 ft above sea level. One thing that I would love to have six months after graduation would be to have a real job and to start my career. Five years after I graduate I would love to be able to by my own house and have a good job. I hope my greatest accomplishment in my career are just to be able to keep a job that I enjoy and for me to be happy with my life. Given my hopes and dreams, some things I hope to accomplish in this course are to learn r, improve my communication skills, and to pass the class. 
+
+My name is Tiger Su and I am from Nanjing, China. 5 years ago, I came to the US to study. I finished high school in Tennessee and came to CU boulder continue my journey in the US. I'd like to know why In a Blackjack game dealer always has a greater chance of winning. After 6 months of graduation, I wish I can find a job I like to do, and rent a place live by myself. 5 years after graduation, I wish I have a stable job that I like, start saving money for purchase a house. I don't really have a specific career accomplishment, but I wish I can be the "Hero of Justice"(正義の味方). From this course, I hope I can learn some basics of data analyzes.
+
+![](https://i.imgur.com/UDY3lHH.jpg)
 
 
+
+
+My name is Emery Schattinger and I am from Lakewood, Colorado. An interesting fact about my is that I am a triplet with two brothers the exact same age. One question that I would like to know the answer to would be if people who live at sea level live longer than people that live at 10,000 ft above sea level. One thing that I would love to have six months after graduation would be to have a real job and to start my career. Five years after I graduate I would love to be able to by my own house and have a good job. I hope my greatest accomplishment in my career are just to be able to keep a job that I enjoy and for me to be happy with my life. Given my hopes and dreams, some things I hope to accomplish in this course are to learn R, improve my communication skills, and to pass the class. 
+
+![](https://i.imgur.com/v8GeN57.jpg)
 
 
 
