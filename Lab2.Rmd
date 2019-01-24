@@ -12,6 +12,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## About me
 
+My name is Jason Giblin. I am a junior from Chicago, Illinois studying Math and Economics. A question that I would like to know the answer to by analyzing data is if physically active students have more academic success in college as opposed to non-physically active students. After graduation, I would like to take an extended trip traveling around North America to climb in different locations. Further down the line, I would like to have a full time job working as an actuary for a health insurance company. Ideally I would like to have a job in Denver or Salt Lake City. My career accomplishment goals are modest, I would simply like to have a steady job with a good work-life balance that will allow me to climb and do other outdoor activities as much as possible. I hope to learn in this course how to program in R, and to get a base for computer programming. I hope to learn enough that I will be successful in my summer actuarial internship for the healthcare company Cigna. An interesting fact about me is that I love to rock climb, I often go on climbing trips on weekends to different climbing areas. 
+
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
