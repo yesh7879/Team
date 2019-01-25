@@ -13,14 +13,12 @@ knitr::opts_chunk$set(echo = TRUE)
 ### Team Picture
 ![](https://i.imgur.com/O2gI3yq.jpg){#id .class width=800 height=640px}
 
-## Our Team Goal
+### Our Team Goal
 Our team is named R4L (R For Life). Our team's main goal for the course this semester is to learn how to program in R effectively and to work together efficiently as a team. 
 
 # Individual Section Part 1
 
 ### About Jason
-
-
 
 My name is Jason Giblin. I am a junior from Chicago, Illinois studying Math and Economics. A question that I would like to know the answer to by analyzing data is if physically active students have more academic success in college as opposed to non-physically active students. After graduation, I would like to take an extended trip traveling around North America to climb in different locations. Further down the line, I would like to have a full time job working as an actuary for a health insurance company. Ideally I would like to have a job in Denver or Salt Lake City. My career accomplishment goals are modest, I would simply like to have a steady job with a good work-life balance that will allow me to climb and do other outdoor activities as much as possible. I hope to learn in this course how to program in R, and to get a base for computer programming. I hope to learn enough that I will be successful in my summer actuarial internship for the healthcare company Cigna. An interesting fact about me is that I love to rock climb, I often go on climbing trips on weekends to different climbing areas. 
 
@@ -29,7 +27,7 @@ My name is Jason Giblin. I am a junior from Chicago, Illinois studying Math and 
 
 ### About YenTing
 
-My name is Yen-Ting Shen. I am a junior from Taipei, Taiwan majoring in business information management. A question I would like to know is what's the best place to eat in Boulder? I would like to be a backpacker after my graduation and I wish I could work in a major company such as Google or Facebook as a data analyst. I hope the greatest career accomplishment will be a entrepreneur and successfully survive in this compativive world. I hope I can learn how to use R to analysis the data and be able to explain it to others. I want to buy the fried chicken restaurant Raising Cane's so I could go there to eat the fried chicken anytime I want!
+My name is Yen-Ting Shen. I am a junior from Taipei, Taiwan majoring in business information management. A question I would like to know is what’s the best place to eat in Boulder? I would like to be a backpacker after my graduation, and I wish I could work in a major company such as Google or Facebook as a data analyst. I hope the greatest career accomplishment will be an entrepreneur and successfully survive in this competitive world. I hope I can learn how to use R to analysis the data and be able to explain it to others. I want to buy the fried chicken restaurant Raising Cane’s so I could go there to eat the fried chicken anytime I want!
 
 ![](https://i.imgur.com/5Fyz6wq.jpg){#id .class width=400 height=320px}
 
@@ -41,7 +39,6 @@ My name is Tiger Su and I am from Nanjing, China. 5 years ago, I came to the US 
 
 
 ### About Emery
-## About Emery
 
 My name is Emery Schattinger and I am from Lakewood, Colorado. An interesting fact about my is that I am a triplet with two brothers the exact same age. One question that I would like to know the answer to would be if people who live at sea level live longer than people that live at 10,000 ft above sea level. One thing that I would love to have six months after graduation would be to have a real job and to start my career. Five years after I graduate I would love to be able to by my own house and have a good job. I hope my greatest accomplishment in my career are just to be able to keep a job that I enjoy and for me to be happy with my life. Given my hopes and dreams, some things I hope to accomplish in this course are to learn R, improve my communication skills, and to pass the class. 
 
@@ -59,10 +56,7 @@ My name is Baiyu Chen, I come from Foshan, China. About the question, I have a q
 
 I think it is cool that you said you like to rock climb because it shows that even if you are half way up a cliff or half way done with a assingment, you won't quit.  -Emery 
 
-
-YenTing- I think you 
-
-
+I like your rock climbing pictuers that is a very interesting outdoor activity I always want to try. Also, I feel like your plan after your graduation is very interesting. Your goal is very specific and I hope and believe you will definitely achieve your goal in the future. -YenTing
 
 Jason did very well on asking questions when he don’t know something. He went to the office hour get help. I know it is very hard to start learning something new, sometimes googling online might be a better solution then asking others.  -Tiger
 
@@ -86,6 +80,8 @@ I really liked your question about why In a Blackjack game the dealer always has
 
 Becoming a hero of justice is not easy, but I think it is a very interesting idea. I want to know more about why you want to be a hero and what hero you want to be. I think you can talk more about your wish of “Hero of Justice”. - Baiyu
 
+I found your question is very cool, and I also want to know the answer too because I always lose money while playing Blackjack. Also, the accomplishment you wrote on about you is very creative. I believe you can do it! -YenTing 
+
 ### Feedback for Emery
 
 During the team meeting, Emery always came on time and studying by himself there even before the meeting. Self-study is definitely a good habit, asking others is also a very good way to study.  -Tiger
@@ -94,11 +90,14 @@ Hi Emery. I thought it is very cool that you are a triplet. One thing that I hav
 
 Your question is fun, and I want to know which kind of people will live longer too. I liked your future plan, but I want to know what jobs are a good job for you, and what kind of the job you want to do. -Baiyu
 
+Hi Emery, I feel it is very interesting to have two same age brother. Also, the question you are asking is very cool. I want to know the answer as well. It is nice to meet you this week. -YenTing
+
 ### Feedback for BaiYu
 
-I think it's cool that you said you want to make something that will change the world because it shows that you care about everyone and your team. It's also cool that you want to improve your comunication skills because I also need to improve mine. -Emery
+I think it's cool that you said you want to make something that will change the world because it shows that you care about everyone and your team. Also, it was cool that you want to run your own bissness because it shows that you are motivated to be sucsessful which is a great trait to have. I also need to improve my communicaton skills so I liked that you said that. -Emery
+
 Baiyu is quiet all the time, he also likes working by himself. However, Baiyu has a lot of experience on programing that he gives up useful suggestions during the team meeting.   -Tiger
 
 Hi Baiyu. One thing that I found interesting about your bio was how you wanted to be an entrepreneur and run your own business after working for a big IT company. A question I have is if you do end up getting a Master's Degree, what field would you like that degree to be in? - Jason Giblin 
 
-I thought it was cool that you want to run your own bissness because it shows that you are motivated to be sucsessful which is a great trait to have. I also need to improve my communicaton skills so I liked that you said that. -Emery
+Hi Baiyu, The thing I found very interesting is the question you are asking because I have the same question as well. In addition, I feel like your goal is very clear and aggressive, and I believe you will achieve evey goal you want in the future. -YenTing 
