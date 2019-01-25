@@ -49,7 +49,8 @@ My name is Emery Schattinger and I am from Lakewood, Colorado. An interesting fa
 
 ### About BaiYu
 
-My name is Baiyu Chen, I come from Foshan, China. About the question, I have a question about can exercise improves our studying. I don't have an exact plan in six months after graduation, I am not deciding whether to get a job or to earn a Master degree. After five years, I want to work in a huge IT company like Google, Amazon, or Apple. In the future, I wish I will have learned enough thing in college and company so I can run my own business, or I hope I will make something which will change our world. Therefore, I want to learn how to process data and combine the knowledge with my computer science background, and also I want to improve my communication skills and collaboration skills by the group work.  
+My name is Baiyu Chen, I come from Foshan, China. About the question, I have a question about can exercise improves our studying. I don't have an exact plan in six months after graduation, I am not deciding whether to get a job or to earn a Master degree. After five years, I want to work in a huge IT company like Google, Amazon, or Apple. In the future, I wish I will have learned enough thing in college and company so I can run my own business, or I hope I will make something which will change our world. Therefore, I want to learn how to process data and combine the knowledge with my computer science background, and also I want to improve my communication skills and collaboration skills by the group work. Furthermore, I plan to lose some weight during this semester.
+
 ![](https://i.imgur.com/8mLGxgQ.jpg){#id .class width=400 height=320px}
 
 # Individual Section Part 2
@@ -65,6 +66,8 @@ YenTing- I think you
 
 Jason did very well on asking questions when he don’t know something. He went to the office hour get help. I know it is very hard to start learning something new, sometimes googling online might be a better solution then asking others.  -Tiger
 
+A good self-introduce, Jason did a very clear future plan, he had set some Specific targets to make his career success. Rock climbing is very cool, and the photos look great too. -Baiyu
+
 ### Feedback for YenTing
 
 I really liked how you said that you wanted to work for google after you graduate becasue it shows that you are ambitious and want to be successful.  -Emery
@@ -74,17 +77,22 @@ Tim is very energetic all the time. He always get involved in the discussion. So
 
 Hi Tim. I thought your bio was an interesting read. A piece of advice that I would give you is to maybe pick a different question that could be answered by data rather than what is the best place to eat in Boulder, which is a more subjective question. However, some of my personal favorites are Pasta Jay's, Golden Sun, and Cosmos Pizza. Additionally, there was a couple of spelling mistakes that you could fix, you misspelled competitive and you used analysis where you should have used the word analyze. -Jason Giblin
 
+In fact, I have interest to know what is the best eating place in Boulder too, so let me know if you have an answer. Also, Yenting has a very great and Specific future plan and hoping he will achieve success in his career. -Baiyu
+
 ### Feedback for Tiger
 Hi Tiger. I found your question about Blackjack very intriguing, and that would be an interesting problem to analyze with data. I would be interested to learn more about the "Hero of Justice" concept that you mentioned. -Jason Giblin
 
 I really liked your question about why In a Blackjack game the dealer always has a greater chance of winning becasue it made me stop and think. Also what you want to do 6 months after graduaion becasue you want to do the same thing as me. - Emery 
 
+Becoming a hero of justice is not easy, but I think it is a very interesting idea. I want to know more about why you want to be a hero and what hero you want to be. I think you can talk more about your wish of “Hero of Justice”. - Baiyu
 
 ### Feedback for Emery
 
 During the team meeting, Emery always came on time and studying by himself there even before the meeting. Self-study is definitely a good habit, asking others is also a very good way to study.  -Tiger
 
 Hi Emery. I thought it is very cool that you are a triplet. One thing that I have a question about is what kind of job you want to get after graduation. You mentioned that you want to have a real job and start your career, and I am wondering what type of career you want to have. -Jason Giblin
+
+Your question is fun, and I want to know which kind of people will live longer too. I liked your future plan, but I want to know what jobs are a good job for you, and what kind of the job you want to do. -Baiyu
 
 ### Feedback for BaiYu
 
