@@ -1,0 +1,11 @@
+---
+title: "Lab3"
+author: "YenTing Shen"
+date: "1/29/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
