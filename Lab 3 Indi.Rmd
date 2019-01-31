@@ -9,7 +9,7 @@ library(tidyverse)
 source("http://www.openintro.org/stat/data/cdc.R")
 cdc <- as_tibble(cdc)
 
-
+The graph below was make by Emery Schattinger, it shows how smoking can cause your health to have problems by having a graph that compared the health of non smokers and the health of smokers. With the graph you can see that with the group of people who smoke, they tend to have more people with lower health quality and fewer people with better health. When I was going about making the graph, I first picked which variaables I wanted to use, then I desided to split the data up into smokers vs non smokers so it wouldn't be hard to compare the two. Then I thought it would be a good idea to change the colors for the different Health Qualities so you know exactly which two section to compare to. I like thiis graph because it was simple and strait to the point.
 
 ```{r}
 ggplot(data = cdc) + 
