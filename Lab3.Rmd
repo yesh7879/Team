@@ -27,3 +27,5 @@ ggplot(data=cdc, aes(x = height, y = weight, color=as.factor(smoke100)))+
 
 ```
 
+The question that we will try to answer as a team is if smoking lowers a person's overall health. This question is importatnt because a lot of people worldwide smoke cigarettes, and it is very useful to know if they have a detrimental effect on one's health and well-being.
+
