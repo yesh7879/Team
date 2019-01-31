@@ -12,20 +12,23 @@ source("http://www.openintro.org/stat/data/cdc.R")
 cdc <- as_tibble(cdc)
 ```
 
+The question that we will try to answer as a team is if smoking lowers a person's overall health. This question is importatnt because a lot of people worldwide smoke cigarettes, and it is very useful to know if they have a detrimental effect on one's health and well-being.
 
 
-
-The following is a graph of height versus weight, with different colors differentiating between smokers and non smokers. In this data set, height is measured in inches, and weight is measured in pounds. Non-smoker is defined as a person who has smoked less than 100 cigarettes in their life, and smoker is defined as someone who has smoked at least 100 cigarettes in their life. This plot shows that in general, as height increases, weight also increases, as expected. Another interesting bit about this graph is that it appears smokers and non-smokers don't differ by too much in height and weight. With the exception of the two tails of the graph, the best fit lines for smokers and non-smokers are nearly identical.
+The following is a graph of height versus weight, with different colors differentiating between smokers and non smokers. I, Jason Giblin, created this plot. In this data set, height is measured in inches, and weight is measured in pounds. Non-smoker is defined as a person who has smoked less than 100 cigarettes in their life, and smoker is defined as someone who has smoked at least 100 cigarettes in their life. This plot shows that in general, as height increases, weight also increases, as expected. Another interesting bit about this graph is that it appears smokers and non-smokers don't differ by too much in height and weight. With the exception of the two tails of the graph, the best fit lines for smokers and non-smokers are nearly identical. Some adjustments I made to the basic plot was first of all, adding the smooth best fit curve. Additionally, I used colors to differentiate between 2 groups: smokers and non-smokers. I used this color pattern for both the scatter plot and smooth curve. I changed the key to the right of the graph to say "non-smoker" and "smoker." Lastly, I added labels for the title of the graph, and intuitive labels for each of the axes.
 
 ```{r}
 ggplot(data=cdc, aes(x = height, y = weight, color=as.factor(smoke100)))+
   geom_point()+
   geom_smooth()+
+  xlab('height (inches)')+
+  ylab('weight (lbs)')+
+  ggtitle('Height versus Weight for Smokers and Non-Smokers')+
   scale_color_discrete(name = 'Smoking Habits',
                        labels = c('non-smoker', 'smoker'))
 
 
 ```
 
-The question that we will try to answer as a team is if smoking lowers a person's overall health. This question is importatnt because a lot of people worldwide smoke cigarettes, and it is very useful to know if they have a detrimental effect on one's health and well-being.
+
 
