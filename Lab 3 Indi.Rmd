@@ -1,0 +1,24 @@
+---
+title: "Lab3"
+author: "Emery Schattinger"
+date: "January 30, 2019"
+output: html_document
+---
+
+library(tidyverse)
+source("http://www.openintro.org/stat/data/cdc.R")
+cdc <- as_tibble(cdc)
+
+
+
+```{r}
+ggplot(data = cdc) + 
+  geom_bar(mapping = aes(x = smoke100, fill = genhlth)) +
+  ggtitle("Health of Non Smokers vs. Smokers") +
+  labs(y= "People", x = "Non Smokers                                              Smokers")+
+  labs(fill ="Health Quality")
+
+```
+
+
+
