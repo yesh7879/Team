@@ -5,7 +5,25 @@ date: "1/29/2019"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include=FALSE, warning=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+source("http://www.openintro.org/stat/data/cdc.R")
+cdc <- as_tibble(cdc)
+```
+
+
+
+
+The following is a graph of height versus weight, with different colors differentiating between smokers and non smokers. In this data set, height is measured in inches, and weight is measured in pounds. Non-smoker is defined as a person who has smoked less than 100 cigarettes in their life, and smoker is defined as someone who has smoked at least 100 cigarettes in their life. This plot shows that in general, as height increases, weight also increases, as expected. Another interesting bit about this graph is that it appears smokers and non-smokers don't differ by too much in height and weight. With the exception of the two tails of the graph, the best fit lines for smokers and non-smokers are nearly identical.
+
+```{r}
+ggplot(data=cdc, aes(x = height, y = weight, color=as.factor(smoke100)))+
+  geom_point()+
+  geom_smooth()+
+  scale_color_discrete(name = 'Smoking Habits',
+                       labels = c('non-smoker', 'smoker'))
+
+
 ```
 
