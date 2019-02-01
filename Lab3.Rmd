@@ -5,6 +5,7 @@ date: "1/29/2019"
 output: html_document
 ---
 
+
 ```{r setup, include=FALSE, warning=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
@@ -30,10 +31,10 @@ ggplot(data=cdc, aes(x = height, y = weight, color=as.factor(smoke100)))+
 
 ```
 
-<!--The following code expresses how general health distributes in different ages of people. From the CDC data, we have five different conditions of health"excellent, very good, good, fair, and poor". From the plot I created blew, it is very clear that the health condition of "good, very good, excellent" is the majority of the server population. There is an interesting fact that even at of 18, there are still a decent amount of people under "fair" and "poor" health condition. At the age around 30, the percentage of "poor" has a significant increase to a somewhat stable percentage. In the meantime, the percentage of "excellent, very good, good, fair, and poor" start decreasing after age around 55. In conclusion, it is very obvious that general health is distributed differently in different age group. In general, the older you get, the poorer health you get, but it decreases in a smaller amount, which means most people are still living over "good" health condition. 
+The following code expresses how general health distributes in different ages of people. From the CDC data, we have five different conditions of health"excellent, very good, good, fair, and poor". From the plot I created blew, it is very clear that the health condition of "good, very good, excellent" is the majority of the server population. There is an interesting fact that even at of 18, there are still a decent amount of people under "fair" and "poor" health condition. At the age around 30, the percentage of "poor" has a significant increase to a somewhat stable percentage. In the meantime, the percentage of "excellent, very good, good, fair, and poor" start decreasing after age around 55. In conclusion, it is very obvious that general health is distributed differently in different age group. In general, the older you get, the poorer health you get, but it decreases in a smaller amount, which means most people are still living over "good" health condition. 
 
 In the "ggplot i created, I used CDC as my data, and use "geom_bar" function to create a bar graph. Setting the x-axes at age and general health as my bars, which are filled with different colors. In order to make the plot looks more clear, I used "coord_flip()" function to flip the graph, "ggtitle()" function to make a new title, "xlab()" and "ylab()" to title both x-axes and y-axes. For aesthetic purposes, I changed the format of a different condition of general health by using "theme()" function. Legend. position = "top" command let me move it to the top of the graph.
---> 
+
 ```{r}
 #Tiger Su
 ggplot(data = cdc) + 
