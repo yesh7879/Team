@@ -96,3 +96,16 @@ ggplot(data = cdc) +
   labs(fill ="Health Quality")
 ```
 
+
+###Baiyu Chen
+
+This graph shows that most of people had purchased health plan. After 60 years old, there are obvious that one chart's point are denser than another, which mean people who had purchased health plan generally live longer. Furthermore, for the people didn't not purchased health plan, most of people's health condition is "good".
+
+```{r}
+ggplot(data = cdc)+
+  geom_jitter(mapping=aes(x=age, y=genhlth, color=as.factor(genhlth)))+
+  facet_grid(hlthplan~.)+
+  labs(title="Relationship between different age people's health plan situation and health Condition", x= "Age", y="Health Condition")+
+  theme_bw()+
+  scale_color_discrete(name = 'Genhlth',                                     labels = c('Excellent', 'Very Good', 'Good', 'Fair', 'Poor'))
+```
