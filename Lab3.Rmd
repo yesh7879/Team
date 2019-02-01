@@ -16,10 +16,10 @@ cdc <- as_tibble(cdc)
 #R4L Lab 3
 
 ###Over All Question
-The question that we will try to answer as a team is if smoking lowers a person's overall health. This question is importatnt because a lot of people worldwide smoke cigarettes, and it is very useful to know if they have a detrimental effect on one's health and well-being.
+The question that we will try to answer as a team is if smoking lowers a person's overall health. This question is important because a lot of people worldwide smoke cigarettes, and it is very useful to know if they have a detrimental effect on one's health and well-being.
 
 ###Team Plot
-```{r someVar, echo=FALSE}
+```{r}
 ggplot(data = cdc) + 
   geom_bar(mapping = aes(x = age,fill=genhlth)) + 
   
@@ -28,8 +28,11 @@ ggplot(data = cdc) +
 ```
 
 ###Conclusion
+This graph shown above is a histogram of age, separated into four groups: male smokers, male non-smokers, female smokers, and female non-smokers. Additionally, each bar is color-coded to reflect the measure of general health: excellent, very good, good, fair, and poor. One thing that is noticeable from this graph is the number of people with the fair and poor health indicator is much higher for smokers than it is for non-smokers. Additionally, the number of people with very good and excellent health is higher for non-smokers as opposed to smokers. This evidence leads us to conclude that individuals who have smoked more than 100 cigarettes in their lifetime have overall lower general health than individuals who are not smokers. 
+
 
 ### Team's Recommendation 
+From the plots we've made, smoking indicates a very strong negative health effects on both male and females of all ages. Our recommendation is for everyone to quit smoking and have better life that it better to you and for the people around you.
 
 
 #Individual Plots
