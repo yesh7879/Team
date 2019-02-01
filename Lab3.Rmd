@@ -22,9 +22,10 @@ The question that we will try to answer as a team is if smoking lowers a person'
 ```{r}
 ggplot(data = cdc) + 
   geom_bar(mapping = aes(x = age,fill=genhlth)) + 
-  
-  facet_grid(gender ~ smoke100)
-
+  facet_grid(gender ~ smoke100)+
+    xlab('Age(year)')+
+    ylab('# of People')+
+    ggtitle('General Health Among Both Male and Female Smokers of All Ages')
 ```
 
 ###Conclusion
