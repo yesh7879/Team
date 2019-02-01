@@ -69,11 +69,12 @@ ggplot(data = cdc) +
 
 ###Yen-Ting Shen
 
-This plot was created by Yen-Ting Shen. In this plot, my purpose is to find the correlation between the percentage of people with gender and health condition who smoke more than 100 cigarettes in their life. From CDC’s data, we have five different variables under “genhlth”, which are excellent, very good, good, fair, and poor. On the y-axis, smoke100 was measured by 1 or 0, and the number showed on the y-axis means that the percentage of people who smoke at least 100 at a certain age. In this plot, I found that people with below average health condition tend to smoke less after they were 50, and people with excellent or very good health condition tend to smoke more after they were 50. In this plot, I used color to differentiate the gender, and used facet_wrap function to layout all five different health condition, therefor this graph could be more visualize and clear.
+This plot was created by Yen-Ting Shen. In this plot, my purpose is to find the correlation between the percentage of people who smoke more than 100 cigarettes in their life and their gender and relative health condition. From the CDC’s data, we have five different variables under “genhlth”, which are excellent, very good, good, fair, and poor. On the y-axis, smoke100 was measured by 1 or 0, and the number showed on the y-axis means that the percentage of people who smoke at least 100 at a certain age. In this plot, I found that people with below average health condition tend to smoke less after they were 50, and people with excellent or very good health condition tend to smoke more after they were 50. In this plot, I used color in order to make the graph look more clear.
 ```{r}
 ggplot(data = cdc)+
   geom_smooth(mapping = aes(x=age, y=smoke100, color=gender), se=FALSE)+
   facet_wrap(gender~genhlth, nrow = 2)+
+  ggtitle('Proportion of Smokers vs Age, Gender, and Health Condition')+
   scale_color_discrete(name = 'Gender',
                        labels = c('Male', 'Female'))
 ```
