@@ -13,9 +13,21 @@ source("http://www.openintro.org/stat/data/cdc.R")
 cdc <- as_tibble(cdc)
 ```
 
+#R4L Lab 3
+
+###Over All Question
 The question that we will try to answer as a team is if smoking lowers a person's overall health. This question is importatnt because a lot of people worldwide smoke cigarettes, and it is very useful to know if they have a detrimental effect on one's health and well-being.
 
+###Team Plot
 
+###Conclusion
+
+### Team's Recommendation 
+
+
+#Individual Plots
+
+###Jason Giblin
 The following is a graph of height versus weight, with different colors differentiating between smokers and non smokers. I, Jason Giblin, created this plot. In this data set, height is measured in inches, and weight is measured in pounds. Non-smoker is defined as a person who has smoked less than 100 cigarettes in their life, and smoker is defined as someone who has smoked at least 100 cigarettes in their life. This plot shows that in general, as height increases, weight also increases, as expected. Another interesting bit about this graph is that it appears smokers and non-smokers don't differ by too much in height and weight. With the exception of the two tails of the graph, the best fit lines for smokers and non-smokers are nearly identical. Some adjustments I made to the basic plot was first of all, adding the smooth best fit curve. Additionally, I used colors to differentiate between 2 groups: smokers and non-smokers. I used this color pattern for both the scatter plot and smooth curve. I changed the key to the right of the graph to say "non-smoker" and "smoker." Lastly, I added labels for the title of the graph, and intuitive labels for each of the axes.
 
 ```{r}
@@ -31,6 +43,8 @@ ggplot(data=cdc, aes(x = height, y = weight, color=as.factor(smoke100)))+
 
 ```
 
+
+###Tiger Su
 The following code expresses how general health distributes in different ages of people. From the CDC data, we have five different conditions of health"excellent, very good, good, fair, and poor". From the plot I created blew, it is very clear that the health condition of "good, very good, excellent" is the majority of the server population. There is an interesting fact that even at of 18, there are still a decent amount of people under "fair" and "poor" health condition. At the age around 30, the percentage of "poor" has a significant increase to a somewhat stable percentage. In the meantime, the percentage of "excellent, very good, good, fair, and poor" start decreasing after age around 55. In conclusion, it is very obvious that general health is distributed differently in different age group. In general, the older you get, the poorer health you get, but it decreases in a smaller amount, which means most people are still living over "good" health condition. 
 
 In the "ggplot i created, I used CDC as my data, and use "geom_bar" function to create a bar graph. Setting the x-axes at age and general health as my bars, which are filled with different colors. In order to make the plot looks more clear, I used "coord_flip()" function to flip the graph, "ggtitle()" function to make a new title, "xlab()" and "ylab()" to title both x-axes and y-axes. For aesthetic purposes, I changed the format of a different condition of general health by using "theme()" function. Legend. position = "top" command let me move it to the top of the graph.
@@ -45,6 +59,17 @@ ggplot(data = cdc) +
   xlab('Age(year)')+
   ylab('# of People')
  
+```
+
+###Yen-Ting Shen
+
+This plot was created by Yen-Ting Shen. In this plot, my purpose is to find the correlation between the percentage of people with gender and health condition who smoke more than 100 cigarettes in their life. From CDC’s data, we have five different variables under “genhlth”, which are excellent, very good, good, fair, and poor. On the y-axis, smoke100 was measured by 1 or 0, and the number showed on the y-axis means that the percentage of people who smoke at least 100 at a certain age. In this plot, I found that people with below average health condition tend to smoke less after they were 50, and people with excellent or very good health condition tend to smoke more after they were 50. In this plot, I used color to differentiate the gender, and used facet_wrap function to layout all five different health condition, therefor this graph could be more visualize and clear.
+```{r}
+ggplot(data = cdc)+
+  geom_smooth(mapping = aes(x=age, y=smoke100, color=gender), se=FALSE)+
+  facet_wrap(gender~genhlth, nrow = 2)+
+  scale_color_discrete(name = 'Gender',
+                       labels = c('Male', 'Female'))
 ```
 
 
