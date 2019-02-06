@@ -18,6 +18,11 @@ babies <- rename(babies, bwtoz = `bwt/oz`)
 
 ```{r}
 ggplot(data=babies)+
-  geom_histogram(mapping = aes(x=mage))
+  geom_bar(mapping = aes(x=mage, fill= "fl"), position = "stack")+
+  geom_smooth(mapping = aes(x=mage, y= dage, fill= dage), se=FALSE)+
+  theme(legend.position = "bottom")+
+  theme_bw()+
+  ggtitle("Relationship Between Women Termination Age and Education Background")+
+  xlab("Termination (Mother's Age)")
 ```
 
