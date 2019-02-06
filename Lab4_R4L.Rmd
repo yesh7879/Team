@@ -1,0 +1,28 @@
+---
+title: "Lab4_R4L"
+author: "R4L"
+date: "2/5/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(tidyverse)
+babies <- read_csv("https://raw.githubusercontent.com/ervance1/Sp2018-Data-Science-repo/master/babies2a.dat")
+babies <- rename(babies, bwtoz = `bwt/oz`)
+```
+
+```{r}
+ggplot(data=babies)+
+  geom_bar(mapping = aes(x=mage, fill= "fl"), position = "stack")+
+  geom_smooth(mapping = aes(x=mage, y= dage, fill= dage), se=FALSE)+
+  theme(legend.position = "bottom")+
+  theme_bw()+
+  ggtitle("Relationship Between Women Termination Age and Education Background")+
+  xlab("Termination (Mother's Age)")
+```
+
