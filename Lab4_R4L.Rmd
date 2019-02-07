@@ -16,13 +16,17 @@ babies <- read_csv("https://raw.githubusercontent.com/ervance1/Sp2018-Data-Scien
 babies <- rename(babies, bwtoz = `bwt/oz`)
 ```
 
+
 ```{r}
-ggplot(data=babies)+
-  geom_bar(mapping = aes(x=mage, fill= "fl"), position = "stack")+
-  geom_smooth(mapping = aes(x=mage, y= dage, fill= dage), se=FALSE)+
-  theme(legend.position = "bottom")+
-  theme_bw()+
-  ggtitle("Relationship Between Women Termination Age and Education Background")+
-  xlab("Termination (Mother's Age)")
+ggplot(data=babies) +
+  geom_bar(aes(x= med, fill=as.factor(mrace2)), position = "Dodge")+
+  geom_smooth(aes(x=med, y= mage), se=FALSE)+
+  scale_fill_discrete(name = "Women's Race",
+                      labels(c='White', 'Mexican', 'Black', 'Asian', 'Mix', 'Unknown'))
+babies <-na.omit(babies)
 ```
 
+```{r}
+babies <- babies %>%
+  mutate(mrace2 = ifelse(mrace <= 5, 1, mrace))
+```
