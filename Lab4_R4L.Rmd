@@ -24,9 +24,33 @@ ggplot(data=babies) +
   scale_fill_discrete(name = "Women's Race",
                       labels(c='White', 'Mexican', 'Black', 'Asian', 'Mix', 'Unknown'))
 babies <-na.omit(babies)
+
 ```
 
 ```{r}
 babies <- babies %>%
   mutate(mrace2 = ifelse(mrace <= 5, 1, mrace))
+```
+
+
+```{r}
+ggplot(data=babies)+
+  geom_bar(mapping = aes(x=bwtoz, fill = as.factor(smoke)), position = "dodge")+
+  ggtitle('How smoking can affect babies body weight')+
+  scale_fill_discrete(name = 'Does Mother Smoke',
+                       labels = c('Yes', 'No'))
+```
+
+```{r}
+babies<-na.omit(babies)
+ggplot(data = babies, aes(x = as.factor(parity), fill =as.factor(inc)))+
+  geom_bar(position = 'dodge')+
+  scale_fill_discrete(name = 'Income',
+                      labels = c('Under $2500', '$2500-$4999', '$5000-$9999', '$10000-$19999', '$20000-$29999', '$30000-$49999', '$50000-$74999', '$75000-$99999', '$100000-$149999', '$150000+'))+
+  xlab('Number of Previous Pregnancies')
+ 
+cor(babies$parity, babies$inc)
+
+
+
 ```
