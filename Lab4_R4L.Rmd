@@ -189,6 +189,6 @@ Jason Giblin: In addition to my individual work, I did a lot to contribute to th
 
 Emery Schattinger: For my individual work I created a bar plot. Then I helped generate ideas for the team plots.
 
-Baiyu Chen: For individual, I work made a jitter plot. In addition, I helped the team to find how to label the facet.
+Baiyu Chen: For individual, I made a jitter plot. In addition, I figured out the code problems in the team. For example, I helped the team to find how to label the facet.
 
 Tiger Su: To be honest, I didn't help much for this week's team plot due to my laptop got stolen. I went to one of the group meetings finished my individual part and discussed a little about the team part.
