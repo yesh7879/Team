@@ -1,6 +1,6 @@
 ---
 title: "Lab4_R4L"
-author: "R4L"
+author: "Team:R4L, Yen-Ting Shen, Jason Giblin, Tiger Su, BaiYu Chen, Emery Schattinger"
 date: "2/5/2019"
 output: html_document
 ---
@@ -27,6 +27,7 @@ The second question that we would like to answer as a team is if the babies of m
 
 
 ```{r, warning=FALSE}
+babies <-na.omit(babies)
 ggplot(data= babies, aes(x=Premature, fill=as.factor(smoke)))+
   geom_bar(position = "dodge")+
   scale_fill_discrete(name = "Mother who Smoke",
@@ -58,6 +59,26 @@ In the plot shown, we have 2 best fit lines for the birth weight in ounces vs. g
 Based on these results, we concur with the Surgeon General’s warning that mothers should not smoke during a pregnancy. Both of the key findings in the Surgeon General’s 1989 report were verified with the data set we used. We would recommend that women who are pregnant avoid smoking during their pregnancy. 
 
 ###Plots for Preliminary Question
+```{r}
+babies <-na.omit(babies)
+ggplot(data = babies, aes(x = med, fill = as.factor(smoke)))+
+  geom_bar(position = 'dodge')+
+  scale_fill_discrete(name = "Mother who Smoke",
+                      labels = c('No', 'Yes'))+
+  ggtitle('Education vs. Smoking Habits')
+
+```
+```{r}
+ggplot(data = babies, aes(x = inc, fill = as.factor(smoke)))+
+  geom_bar(position = 'dodge')+
+  scale_fill_discrete(name = "Mother who Smoke",
+                      labels = c('No', 'Yes'))+
+  ggtitle('Income vs. Smoking Habits')
+```
+
+###Preliminary Question
+Two of the variables that we determined had different distributions for smokers and non-smokers were the variables income and education. Based on the two bar plots where we plotted the distributions of education and income, with different colored bars for smokers and non-smokers, we can see that they are indeed a little different. Smokers tend to have less education and lower incomes than non-smokers. That could be a possible confounding variable and is something to consider.
+
 
 ##Individual's Part
 
@@ -84,19 +105,17 @@ ggplot(data=babies)+
 The question that I wanted answered was if a pregnant women smokes, will it affect the weight of the baby when it is born. My original thoughts were that if a mother smokes than it will lower the weight of their baby when it is born. But, to answer this question a created a bar graph which depicts the relationship between pregnant women who smoked and didn't smoke while pregnant and the weight of the babies when they were born. On the x-axis I put and named the weight of the babies is oz, and on the y-axis I had the amount of babies. Then I created a legend on the left side of the graph that distinguished the weight of the babies that had a smoking mothers in a blue color and the weight of the babies with non smoking mothers in a red color. When making this plot I had to change the names of the legend and the groups inside the legend to make it more clear. Also renamed the x and y-axis to show exactly what the data was. When deciding what colors to use, I decide on using the fill function instead of the color because it makes the plot a lot for understandable and easier to read. The plot shows that the correlation between mothers who smoked and the mothers who didn't smoke is that the babies weight of the mothers who didn't smoke on average were a lot higher than the weight of the babies who had a smoking mother. Therefore, if a mother smokes while pregnant their baby won't be as healthy and will weigh less than a baby with a non smoking mother. 
 
 ```{r}
+babies<- na.omit(babies)       
 ggplot(data=babies)+
   geom_bar(mapping = aes(x=bwtoz, fill = as.factor(smoke)), position = "dodge")+
   ggtitle('How Smoking Can Affect A Babies Body Weight')+
   labs(y= "Babies", x = "Babies Wieght(Oz)")+
   scale_fill_discrete(name = 'Mother Smokes When Pregnant',
                        labels = c('No', 'Yes'))
-                       
-  babies<- na.omit(babies)                  
-                       
 ```
 
 
-###Jason 
+###Jason Giblin
 
 I, Jason Giblin, made a bar chart detailing the relationship between the number of previous pregnancies a woman had and her income. A question I wanted to answer is if there was any correlation between the number of previous pregnancies a woman had and her income. I suspected that there might be a negative correlation, meaning woman who had more children would have a lower income. I did this by creating a geom_bar function with x as the variable “parity,” which in this data set corresponds to the number of previous pregnancies  a woman had. I then coded the fill of the bars to be her income, which in this data set was an ordered categorical variable that was given values from 0 to 9, with each higher number indicating a higher level of income. I then used the position = ‘dodge’ function in order to separate the different bars by colors and to make the chart more readable. Finally, I added a title, labels to the graph, and a legend in order to make the graph easily understandable. The graph shows that there is no apparent correlation between the income of a woman and the number of previous pregnancies she had. This was contrary to my original thought. I confirmed this by running a correlation between income and parity, and found a very small correlation of .003.
 
@@ -112,7 +131,10 @@ ggplot(data = babies, aes(x = as.factor(parity), fill =as.factor(inc)))+
 ```
 
 
-###Baiyu 
+###Baiyu Chen
+The dense and sparse of the point can reflect the educated level between two group of people.The plot showed that more people who never smoke had took higher level education rather than people who smoke, for people who never smoke have more dense point on 4 and 5 rather than people who smoke. Furthermore, most of smoker had took lower level education rather that higher level education, we can see there are denser point in 1 and 2 rather than others level.
+About what I built the plot, I use the jitter function to make this plot, jitter function can easily show us the density of the variable. Furthermore,I change the color of the poings. Also, I add my personal label to each facet and the plot instead of the default label.
+
 ```{r} 
 require(ggplot2) 
 library(dplyr) 
@@ -133,4 +155,40 @@ ggplot(data = babies)+
   ggtitle("Educated Level Between Smoker and Non-smoker") 
 ``` 
 
+###Tiger Su
+
+The following plot is about the relationships between Mother's Education, age, numbers of previous pregnancies, and amount of cigs they smoke in a day. Facet_wrap function helps indicates a different amount of education the mother has and separate them into different sub-plots. In addition, I use color=as.factor() function to different the number of cigs has been smoked in a day, which shows that half of the data population have smoked before, and lower education(high school graduate or lower) has a higher population of smokers. Nevertheless, the geom_point function also reflects that the number of previous pregnancies and age proportional to each other, whereas, the number of cigs smoked in a day goes the opposite way. Last but not least, I use geom_smooth function to indicate a general pattern of the data. Finally, for aesthetic purposes, I move the labels for numbers of cigs in a day to the bottom of the plot, by using the function " theme(legend.position = "bottom")".
+
+```{r}
+babies <- na.omit(babies)
+
+ggplot(data=babies)+
+  
+  ggtitle('Amount of Cigs vs. Mothers Education, Age, Previous Pregnancies')+
+  
+  geom_point(aes(x=mage,y=parity,color=as.factor(number)))+
+  
+   facet_wrap( ~ med,nrow =2,labeller=labeller(med=c('0'='Less Than 8th Grade','1'='8th-12th Grade','2'='High School Graduate','3'='Trade School','4'='Some College','5'='College Graduate','7'='Trade School Unknown High School')))+
+  
+  geom_smooth(aes(x=mage,y=parity),se = FALSE)+
+  
+  scale_color_discrete(name = 'Numbers of Cigs in A Day',                                     labels = c('Never Smoked', '1-4', '5-9', '10-14', '15-19', '20-29', '30-39','40-60','60+'))+
+
+  xlab("Mothers Age")+
+ 
+  ylab("Numbers of Previous Pregnancies")+
+  
+  theme(legend.position = "bottom")
+                      
+```
+
 ##Who did what?
+Yen-Ting Shen: I created a bar plot, format the Rmarkdown file, booked the study room for out team’s meeting, and created the first team plot with Jason.
+
+Jason Giblin: In addition to my individual work, I did a lot to contribute to the team questions. I created the graph for the second team question, and helped Yen-Ting create the plot for the first team question. I also wrote both conclusions for the two team questions, and additionally wrote the recommendation. 
+
+Emery Schattinger: For my individual work I created a bar plot. Then I helped generate ideas for the team plots.
+
+Baiyu Chen: For individual, I work made a jitter plot. In addition, I helped the team to find how to label the facet.
+
+Tiger Su: To be honest, I didn't help much for this week's team plot due to my laptop got stolen. I went to one of the group meetings finished my individual part and discussed a little about the team part.
