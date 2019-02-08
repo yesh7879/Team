@@ -25,8 +25,11 @@ The second question that we would like to answer as a team is if the babies of m
 
 ###Team's Plots
 ```{r, warning=FALSE}
-ggplot(data=babies, aes(x=bwtoz, y=gestation))+
-  geom_point()
+ggplot(data=babies, aes(x=gestation, y=bwtoz, color = as.factor(smoke)))+
+  geom_smooth(se=FALSE)+
+  scale_fill_discrete(name = "Does Mother Smoke",
+                      labels = c('Yes', 'No'))
+
 
 
 ```
@@ -39,6 +42,7 @@ ggplot(data=babies, aes(x=bwtoz, y=gestation))+
 ##Individual's Part
 
 ### Yen-Ting Shen
+I, Yen-Ting Shen, made a bar chart that shows the relationship between mother's age at termination of pregnancy, mother’s education background, and mother’s race. A question I wanted to answer is whether the education background of the mother affects the age they terminate the pregnancy, and also which race terminates the pregnancy the most. According to the plot I created,  the mothers who only have a high school degree and did not attend any school after are more likely to terminate their pregnancy at the age between 20 to 25. In addition, most of the mothers who terminate their pregnancy are white and asian. I created this plot by using geom_bar function with x = mage. Furthermore since the “mrace” dataset from 0-5 are the same, TA helped me to create another column named “mrace2” which combine 0-5 and set them as 1. Then, I used aes fill=as.factor (mrace2) to make the plot more informative. The result surprised me because I thought the higher education a mother has, it is less likely that they will terminate their pregnancy. However, the higher education does not make mother to stop terminate their pregnancy, it only affects the age when they do it. 
 
 ```{r, warning=FALSE}
 babies <-na.omit(babies)
