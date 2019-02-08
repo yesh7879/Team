@@ -24,18 +24,38 @@ The first question that we would like to answer as a team is if mothers who smok
 The second question that we would like to answer as a team is if the babies of mothers who smoke have lower birth weights than the babies of mothers who do not smoke. The Surgeon General’s report in 1989 says “The newborns of mothers who smoke have smaller birth weights at every gestational age (number of days into pregnancy when child is born).” We will try to determine if this is the case in the data set that we have. 
 
 ###Team's Plots
+
+
 ```{r, warning=FALSE}
-ggplot(data=babies, aes(x=gestation, y=bwtoz, color = as.factor(smoke)))+
-  geom_smooth(se=FALSE)+
-  scale_fill_discrete(name = "Does Mother Smoke",
-                      labels = c('Yes', 'No'))
-
-
+ggplot(data= babies, aes(x=Premature, fill=as.factor(smoke)))+
+  geom_bar(position = "dodge")+
+  scale_fill_discrete(name = "Mother who Smoke",
+                      labels = c('No', 'Yes'))+
+  ggtitle('Team Plot No.1')
 
 ```
+
+```{r, warning=FALSE}
+babies <-na.omit(babies)
+ggplot(data=babies)+
+  geom_smooth(aes(x=gestation, y=bwtoz, color=as.factor(smoke)), se=FALSE)+
+ scale_color_discrete(name = 'Does Mother Smoke',
+                       labels = c('No', 'Yes'))+
+  ggtitle('Team Plot No.2')
+  
+```
+
+
 ###Conclusion
 
+####Question 1
+ In the graph shown above, we are comparing the number of babies born premature vs. the number of babies not born premature, with two different colored bars separating smokers and non smokers. We see that for babies who are not born premature, most of them come from mothers who do not smoke. For babies who are born premature, more of them come from mothers who do smoke than from mothers who do not smoke. This is evidence that the Surgeon General’s report is accurate; mothers who smoke are more likely to have a premature birth as opposed to mothers who do not smoke. 
+
+####Question 2 
+In the plot shown, we have 2 best fit lines for the birth weight in ounces vs. gestation age of babies for mothers who smoke and mothers who do not smoke. The graph shows that for the majority of gestation ages, babies who come from a mother who smokes weigh less than babies who come from a mother who does not smoke. The trend seems to reverse a little after the gestation age of around 300 days, but that is likely due to the fact that there are much fewer data points after 300 days, so it is not very relevant for our analysis. 
+
 ###Recommendation
+Based on these results, we concur with the Surgeon General’s warning that mothers should not smoke during a pregnancy. Both of the key findings in the Surgeon General’s 1989 report were verified with the data set we used. We would recommend that women who are pregnant avoid smoking during their pregnancy. 
 
 ###Plots for Preliminary Question
 
@@ -54,7 +74,8 @@ ggplot(data=babies)+
   facet_grid(med~.)+
   scale_fill_discrete(name = "Women's Race",
                       labels = c('White', 'Black', 'Asian', 'Mix', 'Unknown'))+
-  xlab('Mothers Age Termination Pregnancy')
+  xlab('Mothers Age Termination Pregnancy')+
+  ggtitle('Mothers Age of termination, Education Background, and Race')
   
 ```
 
