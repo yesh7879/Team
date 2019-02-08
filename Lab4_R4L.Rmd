@@ -21,7 +21,7 @@ babies <- rename(babies, bwtoz = `bwt/oz`)
 ###Overall Questions
 
 ###Team's Plots
-```{r}
+```{r, warning=FALSE}
 ggplot(data=babies, aes(x=bwtoz, y=gestation))+
   geom_point()
 
@@ -62,6 +62,8 @@ ggplot(data=babies)+
 ```
 
 ###Jason 
+
+I, Jason Giblin, made a bar chart detailing the relationship between the number of previous pregnancies a woman had and her income. A question I wanted to answer is if there was any correlation between the number of previous pregnancies a woman had and her income. I suspected that there might be a negative correlation, meaning woman who had more children would have a lower income. I did this by creating a geom_bar function with x as the variable “parity,” which in this data set corresponds to the number of previous pregnancies  a woman had. I then coded the fill of the bars to be her income, which in this data set was an ordered categorical variable that was given values from 0 to 9, with each higher number indicating a higher level of income. I then used the position = ‘dodge’ function in order to separate the different bars by colors and to make the chart more readable. Finally, I added a title, labels to the graph, and a legend in order to make the graph easily understandable. The graph shows that there is no apparent correlation between the income of a woman and the number of previous pregnancies she had. This was contrary to my original thought. I confirmed this by running a correlation between income and parity, and found a very small correlation of .003.
 
 ```{r}
 babies<-na.omit(babies)
