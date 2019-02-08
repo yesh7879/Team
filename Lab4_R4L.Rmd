@@ -19,13 +19,16 @@ babies <- rename(babies, bwtoz = `bwt/oz`)
 ##Team's Part
 
 ###Overall Questions
+The first question that we would like to answer as a team is if mothers who smoke are more likely to have a premature birth as opposed to mothers who do not smoke. This is a very important question to be answered because there are a lot of health risks that come with a baby being born premature, and it would be very useful to know if smoking would lead to that. The Surgeon General’s report in 1989 states the following: “Mothers who smoke have increased rates of premature delivery (before 270 days).” We will make a plot to visually determine if there is any truth to this warning. 
+
+The second question that we would like to answer as a team is if the babies of mothers who smoke have lower birth weights than the babies of mothers who do not smoke. The Surgeon General’s report in 1989 says “The newborns of mothers who smoke have smaller birth weights at every gestational age (number of days into pregnancy when child is born).” We will try to determine if this is the case in the data set that we have. 
 
 ###Team's Plots
 ```{r, warning=FALSE}
 ggplot(data=babies, aes(x=bwtoz, y=gestation))+
   geom_point()
 
-cor(babies$parity, babies$inc)
+
 ```
 ###Conclusion
 
@@ -72,8 +75,8 @@ ggplot(data = babies, aes(x = as.factor(parity), fill =as.factor(inc)))+
   scale_fill_discrete(name = 'Income',
                       labels = c('Under $2500', '$2500-$4999', '$5000-$9999', '$10000-$19999', '$20000-$29999', '$30000-$49999', '$50000-$74999', '$75000-$99999', '$100000-$149999', '$150000+'))+
   xlab('Number of Previous Pregnancies')
- 
 
+ cor(babies$parity, babies$inc)
 ```
 
 
