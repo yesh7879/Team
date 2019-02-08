@@ -16,37 +16,23 @@ babies <- read_csv("https://raw.githubusercontent.com/ervance1/Sp2018-Data-Scien
 babies <- rename(babies, bwtoz = `bwt/oz`)
 ```
 
+```{r}
+babies <- babies %>%
+  mutate(mrace2 = ifelse(mrace <= 5, 1, mrace))
+```
 
 ```{r}
 babies <- babies %>%
   mutate(mrace2 = ifelse(mrace <= 5, 1, mrace))
 
-ggplot(data=babies) +
-  geom_bar(aes(x= med, fill=as.factor(mrace2)), position = "Dodge")+
+ggplot(data=babies, aes(x= med, fill=as.factor(mrace))) +
+  geom_bar(position = "dodge")+
   scale_fill_discrete(name = "Women's Race",
                       labels = c('White', 'Black', 'Asian', 'Mix', 'Unknown'))+
   xlab('Mothers Education')
   babies <-na.omit(babies)
 
 ```
-
-```{r}
-ggplot(data=babies)+
-  geom_bar(mapping = aes(x=mage, fill=as.factor(mrace2)))+
-  geom_smooth(mapping = aes(x=mage, y= dage, fill= dage), se=FALSE)+
-  scale_fill_discrete(name = "Women's Race",
-                      labels = c('White', 'Black', 'Asian', 'Mix', 'Unknown'))
-  theme_bw()+
-  ggtitle("Relationship Between Women Termination Age and Education Background")+
-  xlab("Termination (Mother's Age)")
-```
-
-```{r}
-babies <- babies %>%
-  mutate(mrace2 = ifelse(mrace <= 5, 1, mrace))
-```
-
-
 
 ```{r}
 ggplot(data=babies)+
@@ -74,3 +60,23 @@ ggplot(data=babies, aes(x=bwtoz, y=gestation))+
   geom_point()
 ```
 
+###Baiyu's part: 
+```{r} 
+require(ggplot2) 
+library(dplyr) 
+ 
+babies <-na.omit(babies) 
+ 
+babies <- babies %>% 
+  mutate(med2 = ifelse(med==7 , 6, med)) 
+ 
+ggplot(data = babies)+ 
+  geom_jitter(mapping = aes(x=med2, y=mage, color=as.factor(med2)))+ 
+  facet_wrap(~smoke,labeller=labeller(smoke = c('0' = 'Never Smoke', '1' = 'Smoke Now')))+ 
+   scale_color_discrete(name = 'Mothers education',                                     labels = c('0 = less than 8th grade', '1 = 8th to 12th grade. did not graduate high school', '2 = high school graduate, no other schooling', '3 = high school graduate + trade school', '4 = high school graduate + some college', '5 = college graduate', '6 = trade school but unclear if graduated from high school'))+ 
+  scale_x_continuous(breaks=c(0,1,2,3,4,5,6),labels = c('0','1','2','3','4','5','6'))+ 
+  theme_grey()+ 
+  xlab("Mothers Education")+ 
+  ylab("Mothers Age")+ 
+  ggtitle("Educated Level Between Smoker and Non-smoker") 
+``` 
