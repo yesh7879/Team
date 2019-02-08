@@ -10,29 +10,48 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-```{r}
+```{r, include=FALSE}
 library(tidyverse)
 babies <- read_csv("https://raw.githubusercontent.com/ervance1/Sp2018-Data-Science-repo/master/babies2a.dat")
 babies <- rename(babies, bwtoz = `bwt/oz`)
 ```
 
+##Team's Part
+
+###Overall Questions
+
+###Team's Plots
 ```{r}
-babies <- babies %>%
-  mutate(mrace2 = ifelse(mrace <= 5, 1, mrace))
+ggplot(data=babies, aes(x=bwtoz, y=gestation))+
+  geom_point()
+
+cor(babies$parity, babies$inc)
 ```
+###Conclusion
 
-```{r}
+###Recommendation
+
+###Plots for Preliminary Question
+
+##Individual's Part
+
+### Yen-Ting Shen
+
+```{r, warning=FALSE}
+babies <-na.omit(babies)
 babies <- babies %>%
   mutate(mrace2 = ifelse(mrace <= 5, 1, mrace))
 
-ggplot(data=babies, aes(x= med, fill=as.factor(mrace))) +
-  geom_bar(position = "dodge")+
+ggplot(data=babies)+
+  geom_bar(aes(x=mage, fill=as.factor(mrace2)))+
+  facet_grid(med~.)+
   scale_fill_discrete(name = "Women's Race",
                       labels = c('White', 'Black', 'Asian', 'Mix', 'Unknown'))+
-  xlab('Mothers Education')
-  babies <-na.omit(babies)
-
+  xlab('Mothers Age Termination Pregnancy')
+  
 ```
+
+###Emery
 
 ```{r}
 ggplot(data=babies)+
@@ -42,6 +61,8 @@ ggplot(data=babies)+
                        labels = c('Yes', 'No'))
 ```
 
+###Jason 
+
 ```{r}
 babies<-na.omit(babies)
 ggplot(data = babies, aes(x = as.factor(parity), fill =as.factor(inc)))+
@@ -50,17 +71,11 @@ ggplot(data = babies, aes(x = as.factor(parity), fill =as.factor(inc)))+
                       labels = c('Under $2500', '$2500-$4999', '$5000-$9999', '$10000-$19999', '$20000-$29999', '$30000-$49999', '$50000-$74999', '$75000-$99999', '$100000-$149999', '$150000+'))+
   xlab('Number of Previous Pregnancies')
  
-cor(babies$parity, babies$inc)
-
-
 
 ```
-```{r}
-ggplot(data=babies, aes(x=bwtoz, y=gestation))+
-  geom_point()
-```
 
-###Baiyu's part: 
+
+###Baiyu 
 ```{r} 
 require(ggplot2) 
 library(dplyr) 
@@ -80,3 +95,5 @@ ggplot(data = babies)+
   ylab("Mothers Age")+ 
   ggtitle("Educated Level Between Smoker and Non-smoker") 
 ``` 
+
+##Who did what?
