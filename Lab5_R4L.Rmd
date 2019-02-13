@@ -9,3 +9,19 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r, include = FALSE}
+library(tidyverse)
+
+milk <- read.csv('state_milk_production.csv')
+head(milk)
+
+milk <- milk %>%
+  mutate(milk_million = milk_produced/1000000)
+
+milk1970 <- milk %>%
+  filter(year == 1970)
+```
+
+## Team 
+
+## Individual
