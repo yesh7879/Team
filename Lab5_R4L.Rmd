@@ -1,0 +1,39 @@
+---
+title: "Lab 5"
+author: "R4L"
+date: "2/13/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, include = FALSE}
+library(tidyverse)
+
+milk <- read.csv('state_milk_production.csv')
+head(milk)
+
+milk <- milk %>%
+  mutate(milk_million = milk_produced/1000000)
+
+milk1970 <- milk %>%
+  filter(year == 1970)
+```
+
+## Team 
+
+## Individual
+
+```{r}
+milk1996 <- milk %>%
+  filter(year == 1996)
+
+ggplot(data= milk1996, aes(milk_million, fill = region), position = "fill")+
+  geom_histogram(bins = 15)+
+  ggtitle('Histogram of milk produced in 1996 by state')
+
+
+```
+

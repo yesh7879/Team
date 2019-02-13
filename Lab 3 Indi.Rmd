@@ -15,7 +15,7 @@ The graph below was make by Emery Schattinger, it shows how smoking can cause yo
 ggplot(data = cdc) + 
   geom_bar(mapping = aes(x = smoke100, fill = genhlth)) +
   ggtitle("Health of Non Smokers vs. Smokers") +
-  labs(y= "People", x = "Non Smokers                                              Smokers")+
+  labs(y= "People", x = "Non Smokers                                       Smokers")+
   labs(fill ="Health Quality")
 
 ```
