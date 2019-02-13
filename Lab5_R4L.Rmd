@@ -25,3 +25,15 @@ milk1970 <- milk %>%
 ## Team 
 
 ## Individual
+
+```{r}
+milk1996 <- milk %>%
+  filter(year == 1996)
+
+ggplot(data= milk1996, aes(milk_million, fill = region), position = "fill")+
+  geom_histogram(bins = 15)+
+  ggtitle('Histogram of milk produced in 1996 by state')
+
+
+```
+
