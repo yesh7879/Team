@@ -23,9 +23,36 @@ milk1970 <- milk %>%
 ```
 
 ## Team 
+```{r}
+team_milk <- milk %>%
+  filter(state %in% c("Texas", "Colorado", "California", "Tennessee", "Illinois"))  
 
+national <- milk %>%
+  group_by(year) %>%
+  summarise(milk = mean(milk_million))
+
+team_milk$average <- national$milk
+
+group_by(milk, year) %>%
+  summarise(milk = mean(milk_million)) 
+ 
+ggplot(data = team_milk, aes(x = year, y = milk_million, color =state))+
+  geom_point()+
+  geom_smooth(aes(x = year, y = average), se = FALSE)
+
+arrange(team_milk, average) %>%
+  top_n(1)
+
+descteam_avg <- team_milk %>%
+  mutate(avg = -average) %>%
+  arrange(-average) 
+top_n(descteam_avg,1)%>%
+  select(region, state, year, milk_produced, milk_million, average)
+
+```
 ## Individual
 
+###Yen-Ting Shen
 ```{r}
 milk1996 <- milk %>%
   filter(year == 1996)
@@ -36,4 +63,30 @@ ggplot(data= milk1996, aes(milk_million, fill = region), position = "fill")+
 
 
 ```
+```{r}
+milk1996 %>%
+  summarise(avg_milk_produced = mean(milk_million), median_milk_produced = median(milk_million))%>%
+  arrange(desc(avg_milk_produced))
+```
+```{r}
+arrange(milk1996, desc(milk_million))%>%
+  top_n(1)
+```
+```{r}
+descmilkyen <- milk1996 %>%
+  mutate(milkrank = -milk_million) %>%
+  arrange(-milk_million) 
+
+top_n(descmilkyen,1)%>%
+  select(region, state, year, milk_produced, milk_million)
+  
+
+```
+
+
+
+```{r}
+
+```
+
 
