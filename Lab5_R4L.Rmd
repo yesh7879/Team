@@ -1,3 +1,4 @@
+
 title: "Lab 5"
 author: "R4L"
 date: "2/13/2019"
@@ -159,10 +160,10 @@ ggplot(data= milk1998, aes(milk_million, fill = region), position = "fill")+
 ```{r}
 milk1998 %>%
   summarise(avg_milk_produced = mean(milk_million), median_milk_produced = median(milk_million))%>%
-  arrange(desc(avg_milk_produced))
+  arrange(desc(avg_milk_produced)) %>%
+  arrange(milk1998, desc(milk_million)) %>%
+  top_n(1)
 
-arrange(milk1998, desc(milk_million)) %>%
-   top_n(1)
 
 ```
 
