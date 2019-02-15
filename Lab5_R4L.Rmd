@@ -123,6 +123,8 @@ ggplot(data = milk1998, aes(x = as.factor(year), y = milk_million, fill = region
 ```
 
 #### Report
+
+The average milk produced in 1998 was 3145.22 million lb, and the median was 1411.5 million lb.
 ```{r}
 milk1998 %>%
   filter(year == 1998) %>%
@@ -131,10 +133,12 @@ milk1998 %>%
   arrange(desc(avg_milk_produced)) 
 
 ```
+The state that produced the most milk in 1998 was California, which they produced 27,620 million lb. 
 ```{r}
 arrange(milk1998, desc(milk_million))%>%
   top_n(1)
 ```
+The state that produced the least milk in 1998 was Alaska, which they produces 14 million lb. 
 ```{r}
 leastmilk <- milk1998 %>%
   mutate(milkrank = -milk_million) %>%
