@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 ---
 title: "Lab 5"
 author: "R4L"
@@ -23,8 +24,7 @@ milk1970 <- milk %>%
 ```
 
 ## Team 
-### Plot
-```{r, include= FALSE}
+```{r}
 team_milk <- milk %>%
   filter(state %in% c("Texas", "Colorado", "California", "Tennessee", "Illinois"))  
 
@@ -37,6 +37,224 @@ team_milk$average <- national$milk
 group_by(milk, year) %>%
   summarise(milk = mean(milk_million)) 
  
+ggplot(data = team_milk, aes(x = year, y = milk_million, color =state))+
+  geom_point()+
+  geom_smooth(aes(x = year, y = average), se = FALSE)
+
+arrange(team_milk, average) %>%
+  top_n(1)
+
+descteam_avg <- team_milk %>%
+  mutate(avg = -average) %>%
+  arrange(-average) 
+top_n(descteam_avg,1)%>%
+  select(region, state, year, milk_produced, milk_million, average)
+
+```
+## Individual
+
+###Yen-Ting Shen
+```{r}
+milk1996 <- milk %>%
+  filter(year == 1996)
+
+ggplot(data= milk1996, aes(milk_million, fill = region), position = "fill")+
+  geom_histogram(bins = 15)+
+  ggtitle('Histogram of milk produced in 1996 by state')
+
+
+```
+```{r}
+milk1996 %>%
+  summarise(avg_milk_produced = mean(milk_million), median_milk_produced = median(milk_million))%>%
+  arrange(desc(avg_milk_produced))
+```
+```{r}
+arrange(milk1996, desc(milk_million))%>%
+  top_n(1)
+```
+```{r}
+descmilkyen <- milk1996 %>%
+  mutate(milkrank = -milk_million) %>%
+  arrange(-milk_million) 
+
+top_n(descmilkyen,1)%>%
+  select(region, state, year, milk_produced, milk_million)
+  
+
+```
+
+
+###Emery Schattinger
+```{r}
+milk1998 <- milk %>%
+  filter(year == 1998) 
+
+ggplot(data = milk1998, aes(x = as.factor(year), y = milk_million, fill = region)) +
+  geom_boxplot() + 
+  ggtitle('Pounds of Milk Produced in 1998 by Region') + 
+  scale_fill_discrete(name = 'Region') + 
+  xlab('Year') +
+  ylab('Milk Produced (Millions lb)')
+
+```
+```{r}
+milk1998 %>%
+  filter(year == 1998) %>%
+  summarise(avg_milk_produced = mean(milk_million), 
+            median_milk_produced = median(milk_million))%>%
+  arrange(desc(avg_milk_produced)) 
+
+```
+```{r}
+arrange(milk1998, desc(milk_million))%>%
+  top_n(1)
+```
+```{r}
+leastmilk <- milk1998 %>%
+  mutate(milkrank = -milk_million) %>%
+  arrange(-milk_million) 
+
+top_n(leastmilk,1)%>%
+  select(region, state, year, milk_produced, milk_million)
+```
+
+=======
+---
+title: "Lab 5"
+author: "R4L"
+date: "2/13/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, include = FALSE}
+library(tidyverse)
+
+milk <- read.csv('state_milk_production.csv')
+head(milk)
+
+milk <- milk %>%
+  mutate(milk_million = milk_produced/1000000)
+
+milk1970 <- milk %>%
+  filter(year == 1970)
+```
+
+## Team 
+```{r}
+team_milk <- milk %>%
+  filter(state %in% c("Texas", "Colorado", "California", "Tennessee", "Illinois"))  
+
+```{r}
+milk1998<- milk%>%
+  filter(year=="1998")
+```
+```{r}
+ggplot(data = milk1998, aes(x=state, fill=milk_million))+
+  geom_bar(show.legend = FALSE, width = 1)+
+  theme(aspect.ratio = 1)+
+  coord_flip()+
+  coord_polar()
+```
+
+
+group_by(milk, year) %>%
+  summarise(milk = mean(milk_million)) 
+ 
+ggplot(data = team_milk, aes(x = year, y = milk_million, color =state))+
+  geom_point()+
+  geom_smooth(aes(x = year, y = average), se = FALSE)
+
+arrange(team_milk, average) %>%
+  top_n(1)
+
+descteam_avg <- team_milk %>%
+  mutate(avg = -average) %>%
+  arrange(-average) 
+top_n(descteam_avg,1)%>%
+  select(region, state, year, milk_produced, milk_million, average)
+
+```
+## Individual
+
+```{r}
+milk1996 <- milk %>%
+  filter(year == 1996)
+
+ggplot(data= milk1996, aes(milk_million, fill = region), position = "fill")+
+  geom_histogram(bins = 15)+
+  ggtitle('Histogram of milk produced in 1996 by state')+
+  xlab('Milk Produced (Millions lb)') +
+  ylab('count')
+```
+
+
+```
+```{r}
+milk1996 %>%
+  summarise(avg_milk_produced = mean(milk_million), median_milk_produced = median(milk_million))%>%
+  arrange(desc(avg_milk_produced))
+```
+```{r}
+arrange(milk1996, desc(milk_million))%>%
+  top_n(1)
+```
+```{r}
+descmilkyen <- milk1996 %>%
+  mutate(milkrank = -milk_million) %>%
+  arrange(-milk_million) 
+
+>>>>>>> Stashed changes
+
+```
+
+
+###Emery Schattinger
+```{r}
+milk1998 <- milk %>%
+  filter(year == 1998) 
+
+ggplot(data = milk1998, aes(x = as.factor(year), y = milk_million, fill = region)) +
+  geom_boxplot() + 
+  ggtitle('Pounds of Milk Produced in 1998 by Region') + 
+  scale_fill_discrete(name = 'Region') + 
+  xlab('Year') +
+  ylab('Milk Produced (Millions lb)')
+
+```
+```{r}
+milk1998 %>%
+  filter(year == 1998) %>%
+  summarise(avg_milk_produced = mean(milk_million), 
+            median_milk_produced = median(milk_million))%>%
+  arrange(desc(avg_milk_produced)) 
+
+```
+```{r}
+arrange(milk1998, desc(milk_million))%>%
+  top_n(1)
+```
+```{r}
+leastmilk <- milk1998 %>%
+  mutate(milkrank = -milk_million) %>%
+  arrange(-milk_million) 
+
+top_n(leastmilk,1)%>%
+  select(region, state, year, milk_produced, milk_million)
+```
+
+
+### Plot
+```{r, include= FALSE}
+team_milk <- milk %>%
+  filter(state %in% c("Texas", "Colorado", "California", "Tennessee", "Illinois"))  
+group_by(milk, year) %>%
+  summarise(milk = mean(milk_million)) 
+ 
 ```
 
 ```{r}
@@ -44,7 +262,6 @@ ggplot(data = team_milk, aes(x = year, y = milk_million, color =state))+
   geom_point()+
   geom_smooth(aes(x = year, y = average), se = FALSE)
 ```
-
 ###The year when the most milk was produced in the United States.
 
 The year when the most milk produced was in 2017 with production 4309.32 million lb.
@@ -52,9 +269,7 @@ The year when the most milk produced was in 2017 with production 4309.32 million
 arrange(national, milk) %>%
   top_n(1)
 ```
-
 ### The year when the least milk was produced in the United States.
-
 The year when the least milk produced was in 1975 with production 2307.96 million lb.
 ```{r}
 descnational <- national %>%
@@ -79,20 +294,6 @@ The 5 states that produced the least milk in 2017 was Tennessee with production 
 filter(team_milk, year == 2017) %>%
   arrange(milk_million)
 ```
-## Individual
-
-###Yen-Ting Shen
-```{r}
-milk1996 <- milk %>%
-  filter(year == 1996)
-
-ggplot(data= milk1996, aes(milk_million, fill = region), position = "fill")+
-  geom_histogram(bins = 15)+
-  ggtitle('Histogram of milk produced in 1996 by state')+
-  xlab('Milk Produced (Millions lb)') +
-  ylab('count')
-```
-
 #### Report
 The average milk produced in 1996 was 3080.12 million lb, and the median was 1480 million lb.
 ```{r}
@@ -110,11 +311,6 @@ The state that produced the least milk in 1996 was Alaska, which they produces 1
 descmilkyen <- milk1996 %>%
   mutate(milkrank = -milk_million) %>%
   arrange(-milk_million) 
-
-top_n(descmilkyen,1)%>%
-  select(region, state, year, milk_produced, milk_million)
-  
-
 ```
 
 
