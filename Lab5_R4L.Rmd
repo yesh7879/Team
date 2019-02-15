@@ -84,9 +84,37 @@ top_n(descmilkyen,1)%>%
 ```
 
 
-
+###Emery Schattinger
 ```{r}
+milk1998 <- milk %>%
+  filter(year == 1998) 
+
+ggplot(data = milk1998, aes(x = as.factor(year), y = milk_million, fill = region)) +
+  geom_boxplot() + 
+  ggtitle('Pounds of Milk Produced in 1998 by Region') + 
+  scale_fill_discrete(name = 'Region') + 
+  xlab('Year') +
+  ylab('Milk Produced (Millions lb)')
 
 ```
+```{r}
+milk1998 %>%
+  filter(year == 1998) %>%
+  summarise(avg_milk_produced = mean(milk_million), 
+            median_milk_produced = median(milk_million))%>%
+  arrange(desc(avg_milk_produced)) 
 
+```
+```{r}
+arrange(milk1998, desc(milk_million))%>%
+  top_n(1)
+```
+```{r}
+leastmilk <- milk1998 %>%
+  mutate(milkrank = -milk_million) %>%
+  arrange(-milk_million) 
+
+top_n(leastmilk,1)%>%
+  select(region, state, year, milk_produced, milk_million)
+```
 
