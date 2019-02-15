@@ -215,3 +215,37 @@ arrange(milk_million)%>%
   slice(1)
 ```
 
+```{r}
+
+library(tidyverse)
+milk <- read.csv('state_milk_production.csv')
+head(milk)
+milk <- milk %>%
+  mutate(milk_million = milk_produced/1000000)
+
+
+```
+
+###Baiyu Chen's Part:
+I make a histogram to show each states's milk production in 1994. Then, the average milk produced by each state is 3072.04 million of pounds, the median milk produced by each states is 1513 million of pounds. Finally, California produced the most milk which is 25234 million of pounds, and Alaska produced the least amount of milk which is 13.
+```{r}
+milk1994 <- milk %>%
+  filter(year == 1994)
+
+ggplot(data=milk1994)+
+         geom_histogram(mapping = aes(x=state, y = milk_million), fill = "blue", stat = "identity")+
+theme(axis.text.x=element_text(angle=90, 
+vjust = 0))+
+  ggtitle("The USA Milk Production in 1994")+
+  ylab("Milk Production")+
+  xlab("State")
+```
+
+```{r}
+summarise(milk1994, AverageMilkProduced  = mean(milk_million, na.rm = TRUE), MedianMilkProduced = median(milk_million, na.rm = TRUE))
+```
+
+```{r}
+arrange(milk1994, desc(milk_million))
+
+```
