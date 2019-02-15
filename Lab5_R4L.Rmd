@@ -74,7 +74,10 @@ The 5 states that produced the least milk in 2017 was Tennessee with production 
 filter(team_milk, year == 2017) %>%
   arrange(milk_million)
 ```
-## Individual
+###Team Summary
+In this project, our team learns how to use the data transformation to process data, for helping us to read the data much easier. By using data transformation, for example, filter() function helping us to ignore the unwanted data, and we can make a more accurate plot. Furthermore,  we use summarise() function to calculate the average milk produced and median milk produced, and we find there is a huge difference between average and median.  Therefore, analyze data by using data transformation is the most helpful things we learn by this work.
+
+### Individual
 
 ###Yen-Ting Shen
 ```{r}
@@ -99,13 +102,18 @@ The state that produced the most milk in 1996 was California, which they produce
 ```{r}
 arrange(milk1996, desc(milk_million))%>%
   top_n(1)
+
 ```
 
 The state that produced the least milk in 1996 was Alaska, which they produces 14 million lb. 
 ```{r}
-descmilkyen <- milk1996 %>%
-  mutate(milkrank = -milk_million) %>%
-  arrange(-milk_million) 
+# descmilkyen <- milk1996 %>%
+#   mutate(milkrank = -milk_million) %>%
+#   #arrange(-milk_million)%>%
+arrange(milk1996, milk_million)%>%
+  slice(1)
+  
+  
 ```
 
 
@@ -164,6 +172,9 @@ milk1998 %>%
 
 arrange(milk1998, desc(milk_million)) %>%
    top_n(1)
+  
+arrange(milk1998, milk_million) %>%
+   slice(1)
 
 ```
 
@@ -242,10 +253,10 @@ vjust = 0))+
 ```
 
 ```{r}
-summarise(milk1994, AverageMilkProduced  = mean(milk_million, na.rm = TRUE), MedianMilkProduced = median(milk_million, na.rm = TRUE))
+summarise(milk1994, Average_Milk_Produced  = mean(milk_million, na.rm = TRUE), Median_Milk_Produced = median(milk_million, na.rm = TRUE))
 ```
 
 ```{r}
-arrange(milk1994, desc(milk_million))
-
+arrange(milk1994, desc(milk_million))%>%
+summarize(Most_Milk = (first(milk_million)), Most_State = first(state), Least_Milk = last(milk_million), Least_State = last(state))
 ```
