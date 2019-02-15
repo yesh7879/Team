@@ -102,18 +102,15 @@ The state that produced the most milk in 1996 was California, which they produce
 ```{r}
 arrange(milk1996, desc(milk_million))%>%
   top_n(1)
-
 ```
 
 The state that produced the least milk in 1996 was Alaska, which they produces 14 million lb. 
 ```{r}
 # descmilkyen <- milk1996 %>%
 #   mutate(milkrank = -milk_million) %>%
-#   #arrange(-milk_million)%>%
+#   arrange(-milk_million) 
 arrange(milk1996, milk_million)%>%
   slice(1)
-  
-  
 ```
 
 
@@ -176,7 +173,6 @@ milk1998 %>%
 
 arrange(milk1998, desc(milk_million)) %>%
    top_n(1)
-  
 arrange(milk1998, milk_million) %>%
    slice(1)
 
@@ -262,5 +258,6 @@ summarise(milk1994, Average_Milk_Produced  = mean(milk_million, na.rm = TRUE), M
 
 ```{r}
 arrange(milk1994, desc(milk_million))%>%
-summarize(Most_Milk = (first(milk_million)), Most_State = first(state), Least_Milk = last(milk_million), Least_State = last(state))
+  summarize(Most_Milk=first(milk_million), Most_Milk_state=first(state), Least_Milk=last(milk_million), Least_Milk_State=last(state))
+
 ```

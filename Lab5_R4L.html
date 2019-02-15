@@ -283,7 +283,7 @@ ggplot(data= milk1996, aes(milk_million, fill = region), position = &quot;fill&q
 <p>The state that produced the least milk in 1996 was Alaska, which they produces 14 million lb.</p>
 <pre class="r"><code># descmilkyen &lt;- milk1996 %&gt;%
 #   mutate(milkrank = -milk_million) %&gt;%
-#   #arrange(-milk_million)%&gt;%
+#   arrange(-milk_million) 
 arrange(milk1996, milk_million)%&gt;%
   slice(1)</code></pre>
 <pre><code>##    region  state year milk_produced milk_million
@@ -430,9 +430,9 @@ vjust = 0))+
 <pre><code>##   Average_Milk_Produced Median_Milk_Produced
 ## 1               3072.04                 1513</code></pre>
 <pre class="r"><code>arrange(milk1994, desc(milk_million))%&gt;%
-summarize(Most_Milk = (first(milk_million)), Most_State = first(state), Least_Milk = last(milk_million), Least_State = last(state))</code></pre>
-<pre><code>##   Most_Milk Most_State Least_Milk Least_State
-## 1     25234 California         13      Alaska</code></pre>
+  summarize(Most_Milk=first(milk_million), Most_Milk_state=first(state), Least_Milk=last(milk_million), Least_Milk_State=last(state))</code></pre>
+<pre><code>##   Most_Milk Most_Milk_state Least_Milk Least_Milk_State
+## 1     25234      California         13           Alaska</code></pre>
 </div>
 </div>
 
