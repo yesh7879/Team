@@ -1,0 +1,11 @@
+---
+title: "Lab6_R4L"
+author: "R4L"
+date: "2/20/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
