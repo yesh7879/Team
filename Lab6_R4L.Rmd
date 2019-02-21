@@ -1,0 +1,35 @@
+---
+title: "Lab6_R4L"
+author: "R4L"
+date: "2/20/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, include=FALSE}
+library(tidyverse)
+COflights <- read_csv("https://files.osf.io/v1/resources/3z5as4pej8/providers/osfstorage/5a8ca28f57103100104584db")
+```
+
+## Team's Part
+
+### Overall Questions 
+
+1. 
+2.
+Why they are important, and the reasons why they are important
+### Team's Plot
+
+### Conclusion
+(A “Conclusion” is similarly based on data, but could also be the logical consequence of a combination of findings. In this lab report, your conclusion should be the answer to your overall question.)
+### Recommendation
+why implementing it is important for the DIA managers
+## Individual’s Part
+
+### Yen-Ting Shen
+
+## Who did what?
+(I want to know what each student did, in that student’s own words. Who did what and what non-defaults were used to generate which plots.)
