@@ -30,6 +30,64 @@ why implementing it is important for the DIA managers
 ## Individual’s Part
 
 ### Yen-Ting Shen
+```{r}
+
+
+COflightsA <- COflights %>%
+  filter(CANCELLATION_CODE == "A")
+COflightsB <- COflights %>%
+  filter(CANCELLATION_CODE == "B")
+COflightsC <- COflights %>%
+  filter(CANCELLATION_CODE == "C")
+COflightsD <- COflights %>%
+  filter(CANCELLATION_CODE == "D")
+```
+
+```{r}
+filter(COflights, CANCELLED == 1) %>%
+  count()
+#Total number of flights that were cancelled in 2017 is 3656.
+
+count(COflightsA)
+# The total flighs were cancelled due to carrier issues  is 632.
+
+632/3656
+#The probability of cancelled flights due to carrier is 0.1728665.
+
+count(COflightsB)
+# The total flighs were cancelled due to weather is 2533.
+
+2533/3656
+#The probability of cancelled flights due to weather is 0.6928337.
+
+count(COflightsC)
+# The total flighs were cancelled due to National Air System is 487.
+
+487/3656
+#The probability of cancelled flights due to National Air System is 0.1332057.
+
+count(COflightsD)
+# The total flighs were cancelled due to security issues is 4.
+
+4/3656
+#The probability of cancelled flights due to security is 0.001094092.
+```
+
+```{r}
+COflightsyen <- COflights %>%
+  drop_na(CANCELLATION_CODE)
+
+ggplot(COflightsyen, aes(x=CANCELLATION_CODE))+
+  stat_count()+
+  facet_wrap(.~MONTH)
+```
+
+```{r}
+count(COflights, CARRIER) %>%
+  arrange(n)
+```
+
+`
 
 ## Who did what?
 (I want to know what each student did, in that student’s own words. Who did what and what non-defaults were used to generate which plots.)
