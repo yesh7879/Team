@@ -1,0 +1,167 @@
+---
+title: "Lab6_R4L"
+author: "R4L"
+date: "2/20/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, include=FALSE}
+library(tidyverse)
+COflights <- read_csv("https://files.osf.io/v1/resources/3z5as4pej8/providers/osfstorage/5a8ca28f57103100104584db")
+```
+
+## Team's Part
+
+### Overall Questions 
+
+1. 
+2.
+Why they are important, and the reasons why they are important
+### Team's Plot
+
+### Conclusion
+(A “Conclusion” is similarly based on data, but could also be the logical consequence of a combination of findings. In this lab report, your conclusion should be the answer to your overall question.)
+### Recommendation
+why implementing it is important for the DIA managers
+## Individual’s Part
+
+### Yen-Ting Shen
+```{r}
+
+
+COflightsA <- COflights %>%
+  filter(CANCELLATION_CODE == "A")
+COflightsB <- COflights %>%
+  filter(CANCELLATION_CODE == "B")
+COflightsC <- COflights %>%
+  filter(CANCELLATION_CODE == "C")
+COflightsD <- COflights %>%
+  filter(CANCELLATION_CODE == "D")
+```
+
+```{r}
+filter(COflights, CANCELLED == 1) %>%
+  count()
+#Total number of flights that were cancelled in 2017 is 3656.
+
+count(COflightsA)
+# The total flighs were cancelled due to carrier issues is 632.
+
+632/3656
+#The probability of cancelled flights due to carrier is 0.1728665.
+
+count(COflightsB)
+# The total flighs were cancelled due to weather is 2533.
+
+2533/3656
+#The probability of cancelled flights due to weather is 0.6928337.
+
+count(COflightsC)
+# The total flighs were cancelled due to National Air System is 487.
+
+487/3656
+#The probability of cancelled flights due to National Air System is 0.1332057.
+
+count(COflightsD)
+# The total flighs were cancelled due to security issues is 4.
+
+4/3656
+#The probability of cancelled flights due to security is 0.001094092.
+```
+
+```{r}
+COflightsyen <- COflights %>%
+  drop_na(CANCELLATION_CODE)
+
+ggplot(COflightsyen, aes(x=CANCELLATION_CODE, fill = CANCELLATION_CODE))+
+  stat_count()+
+  facet_wrap(.~MONTH, labeller = labeller(MONTH = c("1" = "January", "2" = "February", "3" = "March", "4" = "April", "5" = "May", "6" = "June", "7" = "July", "8" = "August", "9" = "September", "10" = "October", "11" = "November", "12" = "December")))+
+  scale_fill_discrete(name = "Cancellation Reasons",
+                      labels = c('A-Carrier ', 'B-Weather', 'C-National Air System', 'D-Security'))+
+  xlab("Cancellation Reasons")+
+  ggtitle("Cacellation Reasons by Month")
+```
+
+```{r}
+count(COflights, CARRIER) %>%
+  arrange(n)
+```
+
+##Jason Giblin's
+This is my, Jason Giblin's, contribution to the lab. I decided to determine if certain carriers were more or less likely than others to have a delayed arrival. In this report, we define a delayed flight to be one that arrived 15 minutes or later to its scheduled arrival time. The graph below shows the distribution of arrival delay, with a negative value corresponding to a flight that arrived before its scheduled arrival time. Due to the large number of carriers, I made the decision to proceed with my analysis by focusing on the 3 carriers with the most flights to and out of Denver. I determined that UA, OO, and WN are the top 3 carriers. To get a baseline for analysis, I determined the probability that a flight from any airline is delayed 15 minutes or more is .1723604. I then calculated the conditional probabilities that a flight was delayed, given it was from a particular carrier. The probabilities were as follows: .1303526 for UA Airlines, .1651853 for OO Airlines, and 0.2026486 for WN Airlines. This shows that UA Airlines has a much higher probability of a delayed arrival as compared to all carriers, wile UA and OO have a smaller probability of a delayed arrival.
+```{r}
+ggplot(data = COflights, aes(x = ARR_DELAY, fill = as.factor(CARRIER)))+
+  geom_histogram(bins  = 100)+
+  coord_cartesian(xlim = c(-50, 200))+
+  scale_fill_discrete(name = "Airlines")+
+  xlab("Arrival Delay")+
+  ggtitle("Arrival Delay by Airlines")
+
+
+count(COflights, CARRIER) %>%
+  arrange(desc(n)) %>%
+  top_n(3)
+#This is determining the top 3 carriers by number of flights, to be used in future analysis. The top 3 flights in this data set are WN, UA, and OO.
+
+COflightsUA <- COflights %>%
+  filter(CARRIER %in% c("UA"))
+COflightsOO <- COflights %>%
+  filter(CARRIER %in% c("OO"))
+COflightsWN <- COflights %>%
+  filter(CARRIER %in% c("WN"))
+#Creating 3 new variables for the flights from the top 3 carriers as determined above, UA, OO, and WN.
+
+filter(COflights) %>%
+  count()
+#total number of flights from all airlines is 476,809
+
+filter(COflights, ARR_DELAY >= 15) %>%
+  count()
+#total number of flights from all airlines that arrived delayed 15 minutes or more is 82,183
+
+82183/476809
+#The probability that a flight from any airline is delayed 15 minutes or more is .1723604
+
+filter(COflightsUA) %>%
+  count()
+#total number of flights from UA Airline is 124,869
+
+filter(COflightsUA, ARR_DELAY >= 15) %>%
+  count()
+#total number of flights from UA Airline that arrived delayed 15 minutes or more is 16,277
+
+16277/124869
+#The probability that a flight from WN Airline arrived delayed 15 minutes or more is .1303526
+
+filter(COflightsOO) %>%
+  count()
+#total number of flights from OO Airline is 103,623
+
+filter(COflightsOO, ARR_DELAY >= 15) %>%
+  count()
+#total number of flights that arrived delayed 15 minutes or more is 17,117
+
+17117/103623
+#The probability that a flight from OO Airline arrived delayed 15 minutes or more is .1651853 
+
+filter(COflightsWN) %>%
+  count()
+#total number of flights from WN Airline is 136,828
+
+filter(COflightsWN, ARR_DELAY >= 15) %>%
+  count()
+#total number of flights that arrived delayed 15 minutes or more is 27,728
+
+27728/136828
+#The probability that a flight from WN Airline arrived delayed 15 minutes or more is 0.2026486
+
+  
+```
+
+
+## Who did what?
+(I want to know what each student did, in that student’s own words. Who did what and what non-defaults were used to generate which plots.)
