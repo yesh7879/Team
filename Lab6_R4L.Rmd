@@ -160,6 +160,70 @@ filter(COflightsWN, ARR_DELAY >= 15) %>%
 
   
 ```
+##Tiger Su
+The following is the calculation for Departure Delay and Arrival Dealy in Denver. I filter out the destination only in Denver by using filter() function. I created a new variable called dep_offTime, which is the absolute value of DEP_DELAY greater or equal to 15 minutes. Drop_na() function helps me drop all the canceled flights. Afterward, I use the sum of the number of departure delay flights divides the total number of flights to calculate the probability of departure delay. Calculating the probability of arrival delay is very similar to departure delay.
+
+The following graphs show that Arrival Dealy happens more often than Departure Delay, and the longer the distance between the origin and Denver, the less chance the flight will have a departure delay. Last but not least, UA seams have a less chance to dealy on departure but not on arrival.
+```{r}
+#Departure Dealy
+dep_delay<-COflights%>%
+  
+  filter(DEST=='DEN')%>%
+  
+  mutate(dep_offTime =ifelse(abs(DEP_DELAY) >= 15,1,0)) %>%
+  
+  drop_na(dep_offTime)%>%
+  
+  group_by(CARRIER,DISTANCE)%>%
+  
+  summarise(prop_dep_delay = sum(dep_offTime)/n()) %>%
+  
+  arrange(desc(prop_dep_delay))
+
+#Arrival Delay
+arr_delay<-COflights%>%
+  
+  filter(DEST=='DEN')%>%
+  
+  mutate(arr_offTime =ifelse(abs(ARR_DELAY) >= 15,1,0)) %>%
+  
+  drop_na(arr_offTime)%>%
+  
+  group_by(CARRIER,DISTANCE)%>%
+  
+  summarise(prop_arr_delay = sum(arr_offTime)/n()) %>%
+  
+  arrange(desc(prop_arr_delay))
+
+```
+#Graph for Departure Delay
+```{r}
+ggplot(data=dep_delay,mapping = aes(y = prop_dep_delay, x = DISTANCE))+
+  
+  geom_point(aes(color = CARRIER),size=1.1)+
+  
+  geom_smooth(se=FALSE)+
+
+  ggtitle('Distance and Carrier affect Airplane Departure Delay')+
+  
+  xlab("Distance(Miles)")+
+  
+  ylab("Probability of Departure Delay")
+```
+#Graph for Arrival Dealy
+```{r}
+ggplot(data=arr_delay,mapping = aes(y = prop_arr_delay, x = DISTANCE))+
+  
+  geom_point(aes(color = CARRIER),size=1.1)+
+  
+  geom_smooth(se=FALSE)+
+  
+  ggtitle('Distance and Carrier affect Airplane Arrival Delay')+
+  
+  xlab("Distance(Miles)")+
+  
+  ylab("Probability of Arrival Delay")
+```
 
 ##Emery Schattinger
 This is my contribution to the lab, first, the question that I picked and wanted to answered was if the month of the flight or if the airline carriers had an effect of arrivel times. To figure out the answer, I counted all the number of flights that arrived 25 minutes or more before they were scheduled, then I counted the number of flights that arrived early by 25 minute or more of the top airline that had the most flights arrive 25 minutes or more early. After that I found that the probability that if a flight was 25 or more minutes early, what's the probability that the airline was United Airlines. I found that of all flights that arrived early and of all the airlines, United Airlines holds about 40% of the flights. Therefore, the airline does have an affect of when planes arrive to their destination. Also, from the graph you can see that there are a lot less flights that arrived before their scheduled arrivel time in the months December-March. This is do to the weather in the winter months like snow or sleet. So, the months that the flights take place in also has an effect on if the flight will arrive on time to it's destination. 
