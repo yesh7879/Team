@@ -272,4 +272,5 @@ filter(COflights, ARR_DELAY <= -25) %>%
 
 
 ## Who did what?
+Tiger Su: Beside my individual part, I helped Emery fix some of the Rstudio problems. This week I did not get involved much into the team plot. Next week, I will try my best help my teammates with the team plot.
 (I want to know what each student did, in that student’s own words. Who did what and what non-defaults were used to generate which plots.)
