@@ -164,6 +164,59 @@ filter(COflightsWN, ARR_DELAY >= 15) %>%
 
   
 ```
+##Tiger Su
+```{r}
+#Departure Dealy
+dep_delay<-COflights%>%
+  
+  filter(DEST=='DEN')%>%
+  
+  mutate(dep_onTime =ifelse(abs(DEP_DELAY) >= 15,1,0)) %>%
+  
+  drop_na(dep_onTime)%>%
+  
+  group_by(CARRIER,DISTANCE)%>%
+  
+  summarise(prop_dep_delay = sum(dep_onTime)/n(),n_dep_onTime=sum(dep_onTime)) %>%
+  
+  arrange(desc(prop_dep_delay))
+
+#Arrival Delay
+arr_delay<-COflights%>%
+  
+  filter(DEST=='DEN')%>%
+  
+  mutate(arr_onTime =ifelse(abs(ARR_DELAY) >= 15,1,0)) %>%
+  
+  drop_na(arr_onTime)%>%
+  
+  group_by(CARRIER,DISTANCE)%>%
+  
+  summarise(prop_arr_delay = sum(arr_onTime)/n(),n_arr_onTime=sum(arr_onTime)) %>%
+  
+  arrange(desc(prop_arr_delay))
+
+```
+#Graph for Departure Delay
+```{r}
+ggplot(data=dep_delay,mapping = aes(y = prop_dep_delay, x = DISTANCE))+
+  
+  geom_point(aes(color = CARRIER),size=1.1)+
+  
+  geom_smooth(se=FALSE)+
+
+  ggtitle('Distance and Carrier affect Airplane Departure Delay')
+```
+#Graph for Arrival Dealy
+```{r}
+ggplot(data=arr_delay,mapping = aes(y = prop_arr_delay, x = DISTANCE))+
+  
+  geom_point(aes(color = CARRIER),size=1.1)+
+  
+  geom_smooth(se=FALSE)+
+  
+  ggtitle('Distance and Carrier affect Airplane Arrival Delay')
+```
 
 
 ## Who did what?
