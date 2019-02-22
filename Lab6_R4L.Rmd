@@ -161,19 +161,22 @@ filter(COflightsWN, ARR_DELAY >= 15) %>%
   
 ```
 ##Tiger Su
+The following is the calculation for Departure Delay and Arrival Dealy in Denver. I filter out the destination only in Denver by using filter() function. I created a new variable called dep_offTime, which is the absolute value of DEP_DELAY greater or equal to 15 minutes. Drop_na() function helps me drop all the canceled flights. Afterward, I use the sum of the number of departure delay flights divides the total number of flights to calculate the probability of departure delay. Calculating the probability of arrival delay is very similar to departure delay.
+
+The following graphs show that Arrival Dealy happens more often than Departure Delay, and the longer the distance between the origin and Denver, the less chance the flight will have a departure delay. Last but not least, UA seams have a less chance to dealy on departure but not on arrival.
 ```{r}
 #Departure Dealy
 dep_delay<-COflights%>%
   
   filter(DEST=='DEN')%>%
   
-  mutate(dep_onTime =ifelse(abs(DEP_DELAY) >= 15,1,0)) %>%
+  mutate(dep_offTime =ifelse(abs(DEP_DELAY) >= 15,1,0)) %>%
   
-  drop_na(dep_onTime)%>%
+  drop_na(dep_offTime)%>%
   
   group_by(CARRIER,DISTANCE)%>%
   
-  summarise(prop_dep_delay = sum(dep_onTime)/n(),n_dep_onTime=sum(dep_onTime)) %>%
+  summarise(prop_dep_delay = sum(dep_offTime)/n()) %>%
   
   arrange(desc(prop_dep_delay))
 
@@ -182,13 +185,13 @@ arr_delay<-COflights%>%
   
   filter(DEST=='DEN')%>%
   
-  mutate(arr_onTime =ifelse(abs(ARR_DELAY) >= 15,1,0)) %>%
+  mutate(arr_offTime =ifelse(abs(ARR_DELAY) >= 15,1,0)) %>%
   
-  drop_na(arr_onTime)%>%
+  drop_na(arr_offTime)%>%
   
   group_by(CARRIER,DISTANCE)%>%
   
-  summarise(prop_arr_delay = sum(arr_onTime)/n(),n_arr_onTime=sum(arr_onTime)) %>%
+  summarise(prop_arr_delay = sum(arr_offTime)/n()) %>%
   
   arrange(desc(prop_arr_delay))
 
@@ -201,7 +204,11 @@ ggplot(data=dep_delay,mapping = aes(y = prop_dep_delay, x = DISTANCE))+
   
   geom_smooth(se=FALSE)+
 
-  ggtitle('Distance and Carrier affect Airplane Departure Delay')
+  ggtitle('Distance and Carrier affect Airplane Departure Delay')+
+  
+  xlab("Distance(Miles)")+
+  
+  ylab("Probability of Departure Delay")
 ```
 #Graph for Arrival Dealy
 ```{r}
@@ -211,7 +218,11 @@ ggplot(data=arr_delay,mapping = aes(y = prop_arr_delay, x = DISTANCE))+
   
   geom_smooth(se=FALSE)+
   
-  ggtitle('Distance and Carrier affect Airplane Arrival Delay')
+  ggtitle('Distance and Carrier affect Airplane Arrival Delay')+
+  
+  xlab("Distance(Miles)")+
+  
+  ylab("Probability of Arrival Delay")
 ```
 
 ##Emery Schattinger
