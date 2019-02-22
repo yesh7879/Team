@@ -1,6 +1,6 @@
 ---
 title: "Lab6_R4L"
-author: "R4L"
+author: "R4L, Yen-Ting Shen, Jason Giblin, Tiger Su, BaiYu Chen, Emery Schattinger"
 date: "2/20/2019"
 output: html_document
 ---
@@ -12,72 +12,131 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r, include=FALSE}
 library(tidyverse)
 COflights <- read_csv("https://files.osf.io/v1/resources/3z5as4pej8/providers/osfstorage/5a8ca28f57103100104584db")
+denflights <- COflights %>%
+  filter(ORIGIN == "DEN"| DEST == "DEN")
 ```
 
 ## Team's Part
 
 ### Overall Questions 
 
-1. 
-2.
-Why they are important, and the reasons why they are important
+1.Does a flight depariting delayed affect the probability that it will land delayed? If so how strongly?
+2.What are some causes of flights delay?
+
 ### Team's Plot
+
+#### Plot 1
+
+```{r}
+ggplot(data = denflights, aes(x = ARR_DELAY, y = DEP_DELAY))+
+  geom_jitter()
+
+```
+
+#### Plot 2
+
+```{r}
+COflightsyen <- denflights %>%
+  drop_na(CANCELLATION_CODE)
+
+team2 <- COflightsyen %>%
+  filter(CARRIER %in% c("UA", "OO", "WN")) %>%
+  group_by(CARRIER, CANCELLATION_CODE)
+ 
+ggplot(team2, aes(x=CANCELLATION_CODE, fill = CANCELLATION_CODE))+
+  stat_count()+
+  facet_wrap(.~CARRIER)+
+  scale_fill_discrete(name = "Cancellation Reasons",
+                      labels = c('A-Carrier ', 'B-Weather', 'C-National Air System', 'D-Security'))+
+  xlab("Cancellation Reasons")+
+  ggtitle("Cacellation Reasons by Top 3 Carrier")
+  
+```
+
 
 ### Conclusion
 
-(A “Conclusion” is similarly based on data, but could also be the logical consequence of a combination of findings. In this lab report, your conclusion should be the answer to your overall question.)
+1. We attempted to answer the question if a departure delay would affect the probability of a plane having an arrival delay. The following graph shows that there is indeed a strong positive correlation between the length of a departure delay and arrival delay. We then found the conditional probability of an arrival delay given there was a departure delay. That probability is .7728. This shows that if there was a delay of 15 minutes or greater in the departure time, there is a 77.28% chance that the plane will also have an arrival delay of greater than 15 minutes.
+
+
+2. An interesting finding was that OO Airlines had by far the highest number of cancelled flights due to the weather. For all 3 of the top carriers,  weather was the highest determining factor for a cancelled flight, but OO had a vastly higher number of cancelled flights for that reason. Additionally, WN Airlines had the highest number of cancelled flights due to the national air system relative to the other 2 carriers. Moreover, according to Baiyu Chen’s plot , there are longer flight time during winter. Therefore, we believe that  winter make longer flight time for the plane, and eventually cause the long delay.  
+
 ### Recommendation
 
-why implementing it is important for the DIA managers
+Based on these findings, we recommend that DIA looks into ways to prevent flights from departing delayed. Because as shown, departure delays highly increase the probability of an arrival delay. Additionally, we recommend that they look more into possible reasons beyond the data for OO Airlines canceling flights due to weather, and WN Airlines cancelling flights due to the National Air System.
 
 ## Individual’s Part
 
 ### Yen-Ting Shen
-```{r}
+I, Yen-Ting Shen, made a bar chart that shows the relationship between cancellation reasons and month. The interesting thing I found in this plot is that on January, February, and March the most reason to cancel the flights is weather issue, which might be the snowy condition. In addition, on July, August, and September weather is also a huge reason to cancel the flights. In my opinion, I think the weather issue might be heavy rain or strong gust wind.
 
-
-COflightsA <- COflights %>%
+```{r, include= FALSE}
+COflightsA <- denflights %>%
   filter(CANCELLATION_CODE == "A")
-COflightsB <- COflights %>%
+COflightsB <- denflights %>%
   filter(CANCELLATION_CODE == "B")
-COflightsC <- COflights %>%
+COflightsC <- denflights %>%
   filter(CANCELLATION_CODE == "C")
-COflightsD <- COflights %>%
+COflightsD <- denflights %>%
   filter(CANCELLATION_CODE == "D")
 ```
 
+
+Total number of flights that were cancelled in 2017 is 3070.
+
 ```{r}
-filter(COflights, CANCELLED == 1) %>%
+filter(denflights, CANCELLED == 1) %>%
   count()
-#Total number of flights that were cancelled in 2017 is 3656.
+```
+The total flighs were cancelled due to carrier issues is 571.
 
+```{r}
 count(COflightsA)
-# The total flighs were cancelled due to carrier issues is 632.
-
-632/3656
-#The probability of cancelled flights due to carrier is 0.1728665.
-
-count(COflightsB)
-# The total flighs were cancelled due to weather is 2533.
-
-2533/3656
-#The probability of cancelled flights due to weather is 0.6928337.
-
-count(COflightsC)
-# The total flighs were cancelled due to National Air System is 487.
-
-487/3656
-#The probability of cancelled flights due to National Air System is 0.1332057.
-
-count(COflightsD)
-# The total flighs were cancelled due to security issues is 4.
-
-4/3656
-#The probability of cancelled flights due to security is 0.001094092.
 ```
 
+The probability of cancelled flights due to carrier is 0.1859.
+
 ```{r}
-COflightsyen <- COflights %>%
+571/3070
+```
+
+The total flighs were cancelled due to weather is 2052.
+
+```{r}
+count(COflightsB)
+```
+The probability of cancelled flights due to weather is 0.6684039.
+```{r}
+2052/3070
+```
+
+The total flighs were cancelled due to National Air System is 443.
+```{r}
+count(COflightsC)
+```
+
+The probability of cancelled flights due to National Air System is 0.1442997.
+
+```{r}
+443/3070
+```
+
+The total flighs were cancelled due to security issues is 4.
+
+```{r}
+count(COflightsD)
+```
+
+The probability of cancelled flights due to security is 0.001094092.
+
+```{r}
+4/3656
+```
+
+
+
+```{r}
+COflightsyen <- denflights %>%
   drop_na(CANCELLATION_CODE)
 
 ggplot(COflightsyen, aes(x=CANCELLATION_CODE, fill = CANCELLATION_CODE))+
@@ -89,16 +148,15 @@ ggplot(COflightsyen, aes(x=CANCELLATION_CODE, fill = CANCELLATION_CODE))+
   ggtitle("Cacellation Reasons by Month")
 ```
 
+### Jason Giblin's
 
-##Jason Giblin's
-This is my, Jason Giblin's, contribution to the lab. I decided to determine if certain carriers were more or less likely than others to have a delayed arrival. In this report, we define a delayed flight to be one that arrived 15 minutes or later to its scheduled arrival time. The graph below shows the distribution of arrival delay, with a negative value corresponding to a flight that arrived before its scheduled arrival time. Due to the large number of carriers, I made the decision to proceed with my analysis by focusing on the 3 carriers with the most flights to and out of Denver. I determined that UA, OO, and WN are the top 3 carriers. To get a baseline for analysis, I determined the probability that a flight from any airline is delayed 15 minutes or more is .1723604. I then calculated the conditional probabilities that a flight was delayed, given it was from a particular carrier. The probabilities were as follows: .1303526 for UA Airlines, .1651853 for OO Airlines, and 0.2026486 for WN Airlines. This shows that UA Airlines has a much higher probability of a delayed arrival as compared to all carriers, wile UA and OO have a smaller probability of a delayed arrival.
+This is my, Jason Giblin's, contribution to the lab. I decided to determine if certain carriers were more or less likely than others to have a delayed arrival. In this report, we define a delayed flight to be one that arrived 15 minutes or later to its scheduled arrival time. The graph below shows the distribution of arrival delay, with a negative value corresponding to a flight that arrived before its scheduled arrival time. Due to the large number of carriers, I made the decision to proceed with my analysis by focusing on the 3 carriers with the most flights to and out of Denver. I determined that UA, OO, and WN are the top 3 carriers. To get a baseline for analysis, I determined the probability that a flight from any airline is delayed 15 minutes or more is .171. I then calculated the conditional probabilities that a flight was delayed, given it was from a particular carrier. The probabilities were as follows: .130 for UA Airlines, .160 for OO Airlines, and 0.203 for WN Airlines. This shows that UA Airlines has a much higher probability of a delayed arrival as compared to all carriers, wile UA and OO have a smaller probability of a delayed arrival.
+
 ```{r}
+
 ggplot(data = COflights, aes(x = ARR_DELAY, fill = as.factor(CARRIER)))+
   geom_histogram(bins  = 100)+
-  coord_cartesian(xlim = c(-50, 200))+
-  scale_fill_discrete(name = "Airlines")+
-  xlab("Arrival Delay")+
-  ggtitle("Arrival Delay by Airlines")
+  coord_cartesian(xlim = c(-50, 200))
 
 
 count(COflights, CARRIER) %>%
@@ -106,61 +164,63 @@ count(COflights, CARRIER) %>%
   top_n(3)
 #This is determining the top 3 carriers by number of flights, to be used in future analysis. The top 3 flights in this data set are WN, UA, and OO.
 
-COflightsUA <- COflights %>%
+denflightsUA <- denflights %>%
   filter(CARRIER %in% c("UA"))
-COflightsOO <- COflights %>%
+denflightsOO <- denflights %>%
   filter(CARRIER %in% c("OO"))
-COflightsWN <- COflights %>%
+denflightsWN <- denflights %>%
   filter(CARRIER %in% c("WN"))
 #Creating 3 new variables for the flights from the top 3 carriers as determined above, UA, OO, and WN.
 
-filter(COflights) %>%
+filter(denflights) %>%
   count()
-#total number of flights from all airlines is 476,809
+#total number of flights from all airlines is 446,399
 
-filter(COflights, ARR_DELAY >= 15) %>%
+filter(denflights, ARR_DELAY >= 15) %>%
   count()
-#total number of flights from all airlines that arrived delayed 15 minutes or more is 82,183
+#total number of flights from all airlines that arrived delayed 15 minutes or more is 76,329
 
-82183/476809
-#The probability that a flight from any airline is delayed 15 minutes or more is .1723604
+76329/446399
+#The probability that a flight from any airline is delayed 15 minutes or more is .171
 
-filter(COflightsUA) %>%
+filter(denflightsUA) %>%
   count()
-#total number of flights from UA Airline is 124,869
+#total number of flights from UA Airline is 123,779
 
-filter(COflightsUA, ARR_DELAY >= 15) %>%
+filter(denflightsUA, ARR_DELAY >= 15) %>%
   count()
-#total number of flights from UA Airline that arrived delayed 15 minutes or more is 16,277
+#total number of flights from UA Airline that arrived delayed 15 minutes or more is 16,037
 
-16277/124869
-#The probability that a flight from WN Airline arrived delayed 15 minutes or more is .1303526
+16037/123799
+#The probability that a flight from UA Airline will arrive delayed 15 minutes or more is .130
 
-filter(COflightsOO) %>%
+filter(denflightsOO) %>%
   count()
-#total number of flights from OO Airline is 103,623
+#total number of flights from OO Airline is 85,711
 
-filter(COflightsOO, ARR_DELAY >= 15) %>%
+filter(denflightsOO, ARR_DELAY >= 15) %>%
   count()
-#total number of flights that arrived delayed 15 minutes or more is 17,117
+#total number of flights that arrived delayed 15 minutes or more is 13,735
 
-17117/103623
-#The probability that a flight from OO Airline arrived delayed 15 minutes or more is .1651853 
+13735/85711
+#The probability that a flight from OO Airline will arrive delayed 15 minutes or more is .160 
 
-filter(COflightsWN) %>%
+filter(denflightsWN) %>%
   count()
 #total number of flights from WN Airline is 136,828
 
-filter(COflightsWN, ARR_DELAY >= 15) %>%
+filter(denflightsWN, ARR_DELAY >= 15) %>%
   count()
 #total number of flights that arrived delayed 15 minutes or more is 27,728
 
 27728/136828
-#The probability that a flight from WN Airline arrived delayed 15 minutes or more is 0.2026486
+#The probability that a flight from WN Airline will arrive delayed 15 minutes or more is 0.203
 
   
 ```
+
 ##Tiger Su
+
 The following is the calculation for Departure Delay and Arrival Dealy in Denver. I filter out the destination only in Denver by using filter() function. I created a new variable called dep_offTime, which is the absolute value of DEP_DELAY greater or equal to 15 minutes. Drop_na() function helps me drop all the canceled flights. Afterward, I use the sum of the number of departure delay flights divides the total number of flights to calculate the probability of departure delay. Calculating the probability of arrival delay is very similar to departure delay.
 
 The following graphs show that Arrival Dealy happens more often than Departure Delay, and the longer the distance between the origin and Denver, the less chance the flight will have a departure delay. Last but not least, UA seams have a less chance to dealy on departure but not on arrival.
@@ -196,7 +256,9 @@ arr_delay<-COflights%>%
   arrange(desc(prop_arr_delay))
 
 ```
-#Graph for Departure Delay
+
+#####Graph for Departure Delay
+
 ```{r}
 ggplot(data=dep_delay,mapping = aes(y = prop_dep_delay, x = DISTANCE))+
   
@@ -210,7 +272,9 @@ ggplot(data=dep_delay,mapping = aes(y = prop_dep_delay, x = DISTANCE))+
   
   ylab("Probability of Departure Delay")
 ```
-#Graph for Arrival Dealy
+
+#####Graph for Arrival Dealy
+
 ```{r}
 ggplot(data=arr_delay,mapping = aes(y = prop_arr_delay, x = DISTANCE))+
   
@@ -270,6 +334,72 @@ filter(COflights, ARR_DELAY <= -25) %>%
 #The probability that the airline is United Airlines if the flight arrived 25 minutes or more early is 40.382% 
 ```
 
+##Baiyu Chen
+
+In this lab I try to figure out the relationship between flight time and delay in Denver Airport. First I filter the data, I keep the data which plane’s departure and arrive is Denver airport. Then I set if a flight delay more than 15 minutes is a long delay, less than 0 minute is early arrive, otherwise is not delay. In fact I found the probability of delay is similarity between a long flight plane and a short flight plane, but more delay if a plane's flight time more than 450 minutes. Also I found there are more delay during winter and less delay during summer.
+
+```{r}
+COflights_NAdrop<-COflights %>%
+  drop_na(ARR_DELAY)
+
+
+COflights_longflight<-COflights_NAdrop %>%
+  mutate(LONG_FIGHT=ifelse(AIR_TIME >= 300, 1, ifelse(AIR_TIME < 120, 0, ifelse(AIR_TIME>=120&AIR_TIME<300,2, AIR_TIME))))
+
+coflights_DEN2<-filter(COflights_longflight, ORIGIN =="DEN"|DEST=="DEN")
+
+
+coflughts_delay<-COflights_NAdrop %>%
+    mutate(DELAY=ifelse(ARR_DELAY >= 15, 1, ifelse(ARR_DELAY <0, 0, ifelse(ARR_DELAY>=0 &ARR_DELAY < 15, 2, ARR_DELAY))))
+
+
+coflights_DEN<-filter(coflughts_delay, ORIGIN =="DEN"|DEST=="DEN")
+
+ggplot(data = coflights_DEN, mapping=aes(y = AIR_TIME,x=MONTH, color=as.factor(MONTH)))+
+  geom_boxplot(mapping = aes(group = cut_width(MONTH, 1)))+
+  facet_wrap(~DELAY, labeller=labeller(DELAY = c('0' = 'Early Arrive', '1' = 'Long Delay','2' = 'Not Delay')))+
+  scale_x_continuous(breaks=c(0,1,2,3,4,5,6,7,8,9,10,11,12),labels = c('0','1','2','3','4','5','6','7','8','9','10','11','12'))+
+  theme_bw()+
+  ylab("Flight Time( Minutes)")+
+  xlab("Month")+
+  ggtitle("Flight Time During Each Month and Delay in Denver Airport")+
+  scale_color_discrete(name = 'Month', labels = c( 'January', 'February', 'March', 'April', 'May', 'June','July', 'August','September','October','November','December'))
+
+```
+
+```{r}
+# The probability of a long fight(more than 5 hours) in all not cancel fights
+p1 <- filter(coflights_DEN2,LONG_FIGHT ==1)%>% count()/count(COflights_NAdrop)
+p1
+#The probability of a long fight delay(arrive delay more than 15 minute) in all not cancel fights 
+p2 <-filter(coflights_DEN2,LONG_FIGHT ==1, ARR_DELAY >= 15)%>% count()/count(COflights_NAdrop)
+p2
+#The probability of a fight delay give that it's a long fight.
+p3<-p2/p1
+p3
+
+# The probability of a short fight(less than 2 hours) in all not cancel fights
+p1s <-filter(coflights_DEN2,LONG_FIGHT ==0)%>% count()/count(COflights_NAdrop)
+p1s
+#The probability of a short fight delay(arrive delay more than 15 minute) in all not cancel fights 
+p2s<-filter(coflights_DEN2,LONG_FIGHT ==0, ARR_DELAY >= 15)%>% count()/count(COflights_NAdrop)
+p2s
+#The probability of a fight delay give that it's a short fight.
+
+p3s<-p2s/p1s
+p3s
+
+```
+
+
 
 ## Who did what?
-(I want to know what each student did, in that student’s own words. Who did what and what non-defaults were used to generate which plots.)
+
+Jason Giblin:I completed my individual part of determining the top 3 carriers and what their conditional probabilities were for arrival delays. Along with Yen-Ting, I wrote both of our team’s overall questions, conclusions, recommendation, and the coding for the team part. I also used my expertise of probability to help others with the probability questions. 
+
+Yen-Ting Shen: I complete my individual part. In addition, I worked with Jason Giblin to finish the team plots and over all questions. 
+
+Tiger Su: Beside my individual part, I helped Emery fix some of the rstudio problems. This week I did not get involved much into the team plot. Next week, I will try my best help my teammates with the team plot.
+
+
+
