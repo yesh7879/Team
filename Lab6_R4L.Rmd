@@ -89,10 +89,6 @@ ggplot(COflightsyen, aes(x=CANCELLATION_CODE, fill = CANCELLATION_CODE))+
   ggtitle("Cacellation Reasons by Month")
 ```
 
-```{r}
-count(COflights, CARRIER) %>%
-  arrange(n)
-```
 
 ##Jason Giblin's
 This is my, Jason Giblin's, contribution to the lab. I decided to determine if certain carriers were more or less likely than others to have a delayed arrival. In this report, we define a delayed flight to be one that arrived 15 minutes or later to its scheduled arrival time. The graph below shows the distribution of arrival delay, with a negative value corresponding to a flight that arrived before its scheduled arrival time. Due to the large number of carriers, I made the decision to proceed with my analysis by focusing on the 3 carriers with the most flights to and out of Denver. I determined that UA, OO, and WN are the top 3 carriers. To get a baseline for analysis, I determined the probability that a flight from any airline is delayed 15 minutes or more is .1723604. I then calculated the conditional probabilities that a flight was delayed, given it was from a particular carrier. The probabilities were as follows: .1303526 for UA Airlines, .1651853 for OO Airlines, and 0.2026486 for WN Airlines. This shows that UA Airlines has a much higher probability of a delayed arrival as compared to all carriers, wile UA and OO have a smaller probability of a delayed arrival.
