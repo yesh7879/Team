@@ -89,10 +89,6 @@ ggplot(COflightsyen, aes(x=CANCELLATION_CODE, fill = CANCELLATION_CODE))+
   ggtitle("Cacellation Reasons by Month")
 ```
 
-```{r}
-count(COflights, CARRIER) %>%
-  arrange(n)
-```
 
 ##Jason Giblin's
 This is my, Jason Giblin's, contribution to the lab. I decided to determine if certain carriers were more or less likely than others to have a delayed arrival. In this report, we define a delayed flight to be one that arrived 15 minutes or later to its scheduled arrival time. The graph below shows the distribution of arrival delay, with a negative value corresponding to a flight that arrived before its scheduled arrival time. Due to the large number of carriers, I made the decision to proceed with my analysis by focusing on the 3 carriers with the most flights to and out of Denver. I determined that UA, OO, and WN are the top 3 carriers. To get a baseline for analysis, I determined the probability that a flight from any airline is delayed 15 minutes or more is .1723604. I then calculated the conditional probabilities that a flight was delayed, given it was from a particular carrier. The probabilities were as follows: .1303526 for UA Airlines, .1651853 for OO Airlines, and 0.2026486 for WN Airlines. This shows that UA Airlines has a much higher probability of a delayed arrival as compared to all carriers, wile UA and OO have a smaller probability of a delayed arrival.
@@ -216,6 +212,51 @@ ggplot(data=arr_delay,mapping = aes(y = prop_arr_delay, x = DISTANCE))+
   geom_smooth(se=FALSE)+
   
   ggtitle('Distance and Carrier affect Airplane Arrival Delay')
+```
+
+##Emery Schattinger
+This is my contribution to the lab, first, the question that I picked and wanted to answered was if the month of the flight or if the airline carriers had an effect of arrivel times. To figure out the answer, I counted all the number of flights that arrived 25 minutes or more before they were scheduled, then I counted the number of flights that arrived early by 25 minute or more of the top airline that had the most flights arrive 25 minutes or more early. After that I found that the probability that if a flight was 25 or more minutes early, what's the probability that the airline was United Airlines. I found that of all flights that arrived early and of all the airlines, United Airlines holds about 40% of the flights. Therefore, the airline does have an affect of when planes arrive to their destination. Also, from the graph you can see that there are a lot less flights that arrived before their scheduled arrivel time in the months December-March. This is do to the weather in the winter months like snow or sleet. So, the months that the flights take place in also has an effect on if the flight will arrive on time to it's destination. 
+
+```{r}
+
+ggplot(data= COflights)+
+  geom_histogram(mapping = aes(x= ARR_DELAY, fill= CARRIER, position= "stack",), bins= 200)+
+  facet_wrap(.~MONTH, labeller = labeller(MONTH = c("1" = "January", "2" = "February", "3" = "March", "4" = "April", "5" = "May", "6" = "June", "7" = "July", "8" = "August", "9" = "September", "10" = "October", "11" = "November", "12" = "December")))+
+  ggtitle('Delay times for flights in different months')+
+  labs(y= "Flights", x= "Arrival Delay Time (min)")+
+  scale_fill_discrete(name = 'Flight Carriers')+
+  xlim(c(-50,150))
+
+                      
+```
+
+```{r}
+filter(COflights) %>%
+  count()
+#total number of flights from all airlines is 476,809
+
+filter(COflights, ARR_DELAY <= -25) %>%
+  count()
+#total number of flights from all airlines that arrived early by 25 minutes or more is 31,248
+
+31248/476809
+#The probability that a flight from any airline arrived early by 25 minutes or more is 6.55%
+
+filter(COflights, ARR_DELAY <= -25) %>%
+  count(CARRIER) %>%
+  arrange(desc(n)) %>%
+  top_n(1)
+#Counts the number of flights that were early by 25 minutes or more of the top airlines(UA) 12,613
+
+filter(COflights, ARR_DELAY <= -25) %>%
+  count()
+#total number of flights from all airlines that arrived early by 25 minutes or more is 31,248
+
+12613/476809
+#The probability of a flight that arrived early by 25 minutes or more and is the airline (UA) is 2.645%
+
+.02645/.0655
+#The probability that the airline is United Airlines if the flight arrived 25 minutes or more early is 40.382% 
 ```
 
 
