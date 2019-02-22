@@ -65,7 +65,7 @@ ggplot(team2, aes(x=CANCELLATION_CODE, fill = CANCELLATION_CODE))+
 
 Based on these findings, we recommend that DIA looks into ways to prevent flights from departing delayed. Because as shown, departure delays highly increase the probability of an arrival delay. Additionally, we recommend that they look more into possible reasons beyond the data for OO Airlines canceling flights due to weather, and WN Airlines cancelling flights due to the National Air System.
 
-## Individual’s Part
+## Individual Part
 
 ### Yen-Ting Shen
 I, Yen-Ting Shen, made a bar chart that shows the relationship between cancellation reasons and month. The interesting thing I found in this plot is that on January, February, and March the most reason to cancel the flights is weather issue, which might be the snowy condition. In addition, on July, August, and September weather is also a huge reason to cancel the flights. In my opinion, I think the weather issue might be heavy rain or strong gust wind.
@@ -400,6 +400,8 @@ Jason Giblin:I completed my individual part of determining the top 3 carriers an
 Yen-Ting Shen: I complete my individual part. In addition, I worked with Jason Giblin to finish the team plots and over all questions. 
 
 Tiger Su: Beside my individual part, I helped Emery fix some of the rstudio problems. This week I did not get involved much into the team plot. Next week, I will try my best help my teammates with the team plot.
+
+Emery Schattinger: Besides my individual part,helped Tiger fix problems with formatting and gave pretty good ideas, but didn't gelp that much with the team plots this week as much as I should have. 
 
 Baiyu Chen: Otherthan my individual part, I helped the group to conclude some of the team conclusion 2.
 
