@@ -4,8 +4,18 @@ author: "R4L"
 date: "2/26/2019"
 output: html_document
 ---
+```{r}
+library(tidyverse)
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+library(data.table)
+
+```
+
+```{r}
+newdata <- read.table('household_power_consumption.txt',
+                  sep=";",
+                  header = T,
+                  na.string=c("NA","","?"),
+                  stringsAsFactors = FALSE)
 ```
 
