@@ -1,0 +1,378 @@
+---
+title: "TeamLab9"
+author: "baiyu"
+date: "2019年3月17日"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(lubridate)
+library(ggplot2)
+install.packages('OpenStreetMap')
+library(OpenStreetMap)
+bikelocation <-read.csv("Nice_ride_data_2017_season/Nice_Ride_2017_Station_Locations.csv")
+bikehistory <-read.csv("Nice_ride_data_2017_season/Nice_ride_trip_history_2017_season.csv")
+
+LAT1 <- 44.88     # Do not change
+LAT2 <- 45.05     # Do not change
+LON1 <- -93.35    # Do not change
+LON2 <- -93.08    # Do not change
+
+# Generate map
+map <- openmap(c(LAT2,LON1), c(LAT1,LON2), zoom = NULL, # Can change zoom
+               type = "esri",                           # Can change
+               mergeTiles = TRUE)                       # Do not change
+
+# Project map to latitude and longitude
+map.latlon <- openproj(map, projection = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs") # Do not change
+
+# Plot map of Minneapolis
+
+```
+###Series of findings:
+
+###Overall most interesting plot:
+
+#### Interesting Question:
+
+
+
+##Individual Finding:
+
+##Jason’s Part:
+
+The question that I am answering is if there is a significant difference between the duration of rides between members and non-members(casual riders). I started out by creating new variables for members and casual riders. The first step that I did for my analysis was finding out the mean number of seconds. For casual riders, it is 4596.983 seconds, and for members it is 911.39. This is a striking finding, it shows that on average, casual riders ride the bikes for a duration of five times that of the average member ride. Indeed, the histograms below show this trend. Next, I found the median, also known as the 50th percentile. The median duration for a casual rider is 1367 seconds, as compared to 536 seconds for a member rider. We see the casual rider duration is higher as seen with the average, but both medians are much lower than the means for the same rider type. This suggests that the durations for both members and casual riders are highly skewed to the right, towards long rides. I also wanted to calculate the percentiles for the means of the opposite rider types. This was also a striking finding. The average duration for a casual rider comes in at the 99th percentile for a member rider. Similarly, the average duration for a member rider is only the 29th percentile for a casual rider. This furthers the point that casual riders take much longer rides than member riders. The reason for this, I would presume, is that member riders are more likely to use the bikes for commuting short distances; since they are members they would use the system a lot. On the contrary, casual riders are more likely to use the bikes for longer, scenic rides. 
+
+```{r}
+member <- bike_data_season %>%
+  filter(Account.type == "Member")
+casual <- bike_data_season %>%
+  filter(Account.type == "Casual")
+mean(member$Total.duration..Seconds.) #The average number of seconds for a member is 911.39
+
+mean(casual$Total.duration..Seconds.) #The average number of seconds for a casual rider is 4596.983
+
+quantile(member$Total.duration..Seconds., probs = c(.5)) #The 50th percentile for number of seconds ridden by a member is 536
+
+quantile(casual$Total.duration..Seconds., probs = c(.5)) #The 50th percentile for number of seconds ridden by a member is 1367
+
+count(member, Total.duration..Seconds. < 4596.983) 
+287923/(287923+2147)#The perentile for member for the average duration of a casual ride(4596.983) is 99.26th percentile
+
+count(casual, Total.duration..Seconds. < 911.39) 
+49705/(120941+49705)#The perentile for member for the average duration of a member ride(911.39) is 29.13th percentile
+
+member2 <- member %>%
+  filter(Total.duration..Seconds.<7500)
+ggplot(data = member2, aes(x = Total.duration..Seconds.))+
+  geom_histogram()+
+  ggtitle("Histogram of seconds ridden by member riders")
+
+casual2 <- casual %>%
+  filter(Total.duration..Seconds.<15000)
+ggplot(data = casual2, aes(x = Total.duration..Seconds.))+
+  geom_histogram()+
+  ggtitle("Histogram of seconds ridden by casual riders")
+
+bike_data_season2 <- bike_data_season %>%
+  filter(Total.duration..Seconds. < 15000)
+ggplot(data = bike_data_season2, aes(x = Total.duration..Seconds., fill = Account.type))+
+  geom_histogram(position = "dodge")+
+  ggtitle("Histogram of seconds ridden by casual and member riders")
+
+```
+##Yen-Ting's Part
+
+
+```{r}
+
+
+bikelocation1 <- bikelocation %>%
+  mutate(Start_number = Number, End_number = Number)
+bikehistory1 <- bikehistory %>%
+  mutate(Start_number = Start.station.number, End_number = End.station.number)
+
+bikedata <- bikehistory1 %>%
+  left_join(bikelocation1, by = "Start_number") %>%
+  rename(start_Latitude = Latitude, start_Longitude = Longitude)
+
+bikedata2 <- bikehistory1 %>%
+  left_join(bikelocation1, by = "End_number") %>%
+  rename(end_Latitude = Latitude, end_Longitude = Longitude)
+
+bikedata$end_Latitude <- bikedata2$end_Latitude
+bikedata$end_Longitude <- bikedata2$end_Longitude
+
+date <- bikedata %>%
+  mutate(start = format(as.POSIXct(strptime(bikedata$Start.date,"%m/%d/%Y %H:%M",tz="")) ,format = "%m/%d/%Y")) %>%
+  separate(start , sep="/", into = c("months", "days", "years"))
+ 
+date1 <- bikedata %>%
+  mutate(start = format(as.POSIXct(strptime(bikedata$End.date,"%m/%d/%Y %H:%M",tz="")) ,format = "%m/%d/%Y")) %>%
+  separate(start , sep="/", into = c("monthe", "daye", "yeare"))
+
+bikedata$months <- date$months
+bikedata$days <- date$days
+bikedata$years <- date$years
+bikedata$monthe <- date1$monthe
+bikedata$daye <- date1$daye
+bikedata$yeare <- date1$yeare
+
+Hours1 <- bikedata %>%
+  mutate(starttime = format(as.POSIXct(strptime(bikedata$Start.date,"%d/%m/%Y %H:%M",tz="")) ,format = "%H:%M")) %>%
+  separate(starttime , sep=":", into = c("shour", "sminute"))
+
+Hours2 <- bikedata %>%
+  mutate(starttime = format(as.POSIXct(strptime(bikedata$End.date,"%d/%m/%Y %H:%M",tz="")) ,format = "%H:%M")) %>%
+  separate(starttime , sep=":", into = c("ehour", "eminute"))
+
+bikedata$shour <- Hours1$shour
+bikedata$sminute <- Hours1$sminute
+bikedata$ehour <- Hours2$ehour
+bikedata$eminute <- Hours2$eminute
+
+foj <- bikedata %>%
+  filter(months == "07", days == "04") %>%
+  filter(shour >= "06", ehour <= "11") %>%
+  filter(Total.duration..Seconds. <= "9478") 
+```
+
+
+###Three underlying questions:
+####1. What is the 50 percentile on the forth of July, and other data in the morning in 2017?
+
+```{r}
+quantile(foj$Total.duration..Seconds., probs = c(0, 0.25, 0.5, 0.75, 1)) #The 50 percentile on forth of July is 1338 seconds.
+
+quantile(bikedatamorning$Total.duration..Seconds., probs = c(0, 0.25, 0.5, 0.75, 1)) #The 50 percentile in the morning is 847 seconds. 
+```
+
+####2. What is the mean on the forth of July, and other data in the morning in 2017?
+
+```{r}
+mean(foj$Total.duration..Seconds.)  #The average time use in the morning of fourth of July is 2646.488 seconds.
+
+mean(bikedatamorning$Total.duration..Seconds.) #The average time use in the morning is 1909.188 seconds.
+```
+
+####3. Where do most of the people use the bike in the morning of the fourth of July in 2017?
+
+```{r}
+autoplot(map.latlon) +
+  geom_segment(data=foj, 
+               aes(x=start_Longitude, y=start_Latitude,
+                   xend=end_Longitude, yend=end_Latitude), 
+               color = 'Purple', size = .5,
+               arrow = arrow(length = unit(0.2, "cm"))) +
+  labs(x='Longitude', y='Latitude') +
+  scale_x_continuous(limits = c(-93.3, -93.2)) +
+  scale_y_continuous(limits = c(44.93, 45.02)) +
+  ggtitle('Fourth of July Morning Rides')
+
+```
+
+
+```{r}
+#Most of the riders rent their bike and return in the downtown of Minneapolis on the fourth of July in 2017.
+```
+##Baiyu Chen:
+
+My question were the most popular ride routes in 2017, the data2 had show the top 10 popular ride route in 2017. The data showed us some interesting fact: most of top 10 popular routes had the same start and end station. Therefore, we try to figure out why this situation would happened, so I make a plot. According the plot, it showed that the top 4 ride station were near a lake. Hence, we can use this fact to assume that most of people like to do a ride trip near the lake, so the station near the lake will become popular. 
+```{r}
+data2<-bikehistory%>%
+  select(Start.station, End.station)%>%
+  unite(Route, Start.station, End.station, sep = "->")
+
+data2<-data2 %>%
+  count(Route, sort=TRUE)%>%
+  head(10)%>%
+  separate(Route, into = c("Start.station", "End.station"), sep = "->")
+
+data2<-data2 %>%
+  left_join(bikelocation ,c("Start.station"="Name"))
+  
+
+data2<-rename(data2, Start.Latitude = `Latitude`)  
+data2<-rename(data2, Start.Longitude = Longitude)
+data2<-rename(data2, Start.Total.docks = Total.docks)
+
+data2<-data2 %>%
+  left_join(bikelocation ,c("End.station"="Name"))%>%
+  select(-(Number.x),-(Number.y))
+  
+
+data2<-rename(data2, End.Latitude = `Latitude`)  
+data2<-rename(data2, End.Longitude = Longitude)
+data2<-rename(data2, End.Total.docks = Total.docks)
+
+data2
+
+```
+```{r}
+autoplot(map.latlon) + # Plots a map 
+  geom_segment(data=data2, 
+               aes(x=Start.Longitude, y=Start.Latitude,
+                   xend=End.Longitude, yend=End.Latitude), 
+               color = 'blue', size = .5,
+               arrow = arrow(length = unit(0.2, "cm"))) +
+  labs(x='Longitude', y='Latitude') +
+  ggtitle('Popular Ride Route in 2017')
+
+```
+
+##Emery Schattinger
+
+```{r}
+
+Station1 = read.csv("Nice_ride_data_2017_season/Nice_Ride_2017_Station_Locations.csv", header = TRUE)
+Station2 = read.csv("Nice_ride_data_2017_season/Nice_ride_trip_history_2017_season.csv", header = TRUE)
+Station2<- Station2%>%
+  separate(Start.date, into = c("Month", "day", "year"))
+Station3<- Station2%>%
+  filter(Month==5)
+```
+
+
+```{r}
+ggplot(data= Station2)+
+  geom_histogram(mapping = aes(x= Total.duration..Seconds., fill= Month), bins= 50)+
+  ggtitle('Time Duration For Each Ride in Different Months')+
+  labs(y= "People", x= "Duration Time (sec)")+
+  xlim(c(0,9000))+
+  ylim(c(0,15000))
+```
+
+###Three underlying questions:
+####1.What is the mean bike ride in the whole year 2017?
+```{r}
+res<- Station2%>%
+  select_if(is.numeric) %>%
+    map_dbl(sum)
+row<- nrow(Station2)
+(res/row)
+mean<- 1048827581/460718
+```
+#### The average bike ride length is 2276 seconds
+
+####2. What is max bike ride on the 10th of October 2017?
+```{r}
+maxvalue<- Station2%>%
+  filter(Month==10, day==10)%>%
+  summarise(Max_Vals = max(Total.duration..Seconds.), Serial = which.max(Total.duration..Seconds.))
+
+```
+####The longest bike ride is 139924 seconds
+
+####3. Where does the majority of the bikers ride to in May 2017?
+```{r}
+sort(table(Station3$End.station), decreasing=TRUE)[1]
+
+```
+####The majority of the bikers ride to Lake Street & Knox Ave S (1899 riders)
+####Findings:
+  To start the lab, I first made a graph of the time duration in different months, then I came up with three questions that I got looking at the graph. The first question is What is the mean bike ride in the whole year 2017? I found that what average bike ride is 2276 seconds long. Then, my next question is what is max bike ride on the 10th of October 2017? On October 10th I found that the max bike ride was 139924 seconds long which doesn't make any sense because that is like 2,000 hours long which is more than a full day. I think maybe the system messed up because that's not correct. Finally my last question was where do the majority of the bikers ride to in May 2017? I found that 1899 riders ride to Lake Street & Knox Ave S in May 2017.
+  
+##Tiger Su:
+##Question:
+How do people ride bike differently (Ride length?) on Labor day than a normal day(like October 8th)?
+
+##Answer:
+The graph reflects that there are more people ride bikes in downtown Minneapolis on Labor Day than a random day. Most of the sample shows that they all start in the downtown area then they go to the countryside direction.
+
+```{r}
+station_locations <- read.csv("Nice_ride_data_2017_season/Nice_Ride_2017_Station_Locations.csv")
+
+ori_trip_histories <- read.csv("Nice_ride_data_2017_season/Nice_ride_trip_history_2017_season.csv")
+
+new_trip_histories<- ori_trip_histories%>%
+  
+  separate(Start.date, into = c("Start_Month", "Start_day", "Start_year_with_time"), sep = "/",convert = TRUE)%>%
+  
+  separate(Start_year_with_time, into = c("Start_Year","Start_Time"), sep = " ",convert = TRUE)%>%
+  
+  separate(Start_Time, into = c("Start_Hour","Start_Minutes"), sep = ":",convert = TRUE)%>%
+  
+  separate(End.date, into = c("End_Month", "End_day", "End_year_with_time"), sep = "/",convert = TRUE)%>%
+  
+  separate(End_year_with_time, into = c("End_Year","End_Time"), sep = " ",convert = TRUE)%>%
+  
+  separate(End_Time, into = c("End_Hour","End_Minutes"), sep = ":",convert = TRUE)%>%
+  
+  mutate(Rough_Duration_Mins=round(Total.duration..Seconds./60,digits=0))%>%
+
+  filter(Start_Month==9|Start_day==8|End_Month==
+           9|End_day==8,Start_Month==10|Start_day==4| End_Month==10|End_day==4,Rough_Duration_Mins<350)%>%
+  
+  unite(Start_MD,Start_Month,Start_day,sep="/")%>%
+  
+  unite(Enf_MD,End_Month,End_day,sep="/")%>%
+  
+  select(Start_MD,Enf_MD,Start.station,End.station)
+
+  new_trip_histories_xy<-new_trip_histories%>%
+    
+    left_join(station_locations, c("Start.station"="Name"))%>%
+    
+  mutate(Start_x=Latitude,Start_y=Longitude,Start_TD=Total.docks)
+  
+  new_trip_histories_xy <- new_trip_histories_xy[, -c(5:8)]
+  
+  new_trip_histories_xy <- new_trip_histories_xy%>%
+    
+  left_join(station_locations, c("End.station"="Name"))%>%
+    
+  mutate(End_x=Latitude,End_y=Longitude,End_TD=Total.docks)
+    
+  new_trip_histories_xy <- new_trip_histories_xy[, -c(8:11)]
+    
+
+```
+##Graph:
+
+```{r}
+LAT1 <- 44.88     
+LAT2 <- 45.05     
+LON1 <- -93.35   
+LON2 <- -93.08    
+
+map <- openmap(c(LAT2,LON1), c(LAT1,LON2), zoom = NULL, type = "stamen-terrain", mergeTiles = TRUE)                   
+map.latlon <- openproj(map, projection = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs") 
+
+autoplot(map.latlon)+
+  
+  geom_segment(data=new_trip_histories_xy,
+               aes(x=Start_x, y=Start_y,
+                   
+                   xend=End_x, yend=End_y),
+               
+               color=End.station, size = .5,
+               
+               arrow = arrow(length = unit(0.2, "cm")))+
+  
+  labs(x='Longitude', y='Latitude') +
+  
+  scale_x_continuous(limits = c(-93.3, -93.2)) +
+  
+  scale_y_continuous(limits = c(44.93, 45.02)) +
+  
+  ggtitle('Labor Day Ride & A Random Day Ride')
+```
+###Who did what?
+
+Yen-Ting Shen: In this lab assignment, I use functions like mutate, left_join, separate, filter, quantile, and geom_segment. First, I used left_join to combine the data I want from the two datasets into one dataset. Then, I use functions like seperate, and filter to separate the date/ time into another new columns. In addition, I filtered out  the extreme data in Total.duration..Seconds. from 96.5 percentile to 100 percentile on the fourth of july since those data will hurt the accuracy of the day. Moreover, I use geom_segment to make a plot that shows the latitude and longitude on x and y axises. The interesting finding I found from my plot is that most of the people on the fourth of july uses the bike sharing service in the downtown of Minneapolis. Furthermore, the average use of bike time was significantly higher comparing than normal date. The average time use on the fourth of july in 2017 was 2646.488 seconds, and the normal date use was 1909.188 seconds. 
+
+Jason Giblin: 
+
+Emery Schattinger: 
+In this lab I used the mutate, separate, filter, and the summarize function.  I used the separate function to split the date into month, day, and year. I also used it to filter certain days and months to gather specific data. I used the filter function to filter certain days or months to gather data. And I used the summarize function to help me find the maximum value for the bike ride duration.  
+
+Baiyu Chen: Finding the most popular ride route in 2017, and answered why they are popular.
+
+Tiger Su:
+I thought in Labor Day, people will tend to be more like go out due to there will be a day off. I use a separate function to separate out the Labor Day and a Random day to compare. In order to use Latitude and Longitude data in the other file, I used left_join function to combine them together. Finally, I used autoplot with geom_segment function to plot the data uses xy-cords in a map
+
