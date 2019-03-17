@@ -213,7 +213,23 @@ data2<-rename(data2, End.Total.docks = Total.docks)
 data2
 
 ```
+
 ```{r}
+LAT1 <- 44.88     # Do not change
+LAT2 <- 45.05     # Do not change
+LON1 <- -93.35    # Do not change
+LON2 <- -93.08    # Do not change
+
+# Generate map
+map <- openmap(c(LAT2,LON1), c(LAT1,LON2), zoom = NULL, # Can change zoom
+               type = "esri",                           # Can change
+               mergeTiles = TRUE)                       # Do not change
+
+# Project map to latitude and longitude
+map.latlon <- openproj(map, projection = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs") # Do not change
+
+# Plot map of Minneapolis
+
 autoplot(map.latlon) + # Plots a map 
   geom_segment(data=data2, 
                aes(x=Start.Longitude, y=Start.Latitude,
