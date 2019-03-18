@@ -45,13 +45,21 @@ map.latlon <- openproj(map, projection = "+proj=longlat +ellps=WGS84 +datum=WGS8
 
 ###Team Part:
 ```{r}
-
+Station4<- Station2%>%
+  filter(Month== 6:8)
+ggplot(data= Station4)+
+  geom_histogram(mapping = aes(x= Total.duration..Seconds., fill= Month), bins= 40)+
+  ggtitle('Time Duration For Each Bike Ride in May 2017')+
+  labs(y= "People", x= "Duration Time (sec)")+
+  xlim(c(0,5000))+
+  ylim(c(0,7500))
 ```
-
+##Team Plot Findings:
+From the team plot you can see that there are more bikers biking in the month July. This makes sence becasue July is the hottest month of the year so more people go outside and exercise. 
 
 ##Individual Finding:
 
-##Jason’s Part:
+##Jasons Part:
 
 The question that I am answering is if there is a significant difference between the duration of rides between members and non-members(casual riders). I started out by creating new variables for members and casual riders. The first step that I did for my analysis was finding out the mean number of seconds. For casual riders, it is 4596.983 seconds, and for members it is 911.39. This is a striking finding, it shows that on average, casual riders ride the bikes for a duration of five times that of the average member ride. Indeed, the histograms below show this trend. Next, I found the median, also known as the 50th percentile. The median duration for a casual rider is 1367 seconds, as compared to 536 seconds for a member rider. We see the casual rider duration is higher as seen with the average, but both medians are much lower than the means for the same rider type. This suggests that the durations for both members and casual riders are highly skewed to the right, towards long rides. I also wanted to calculate the percentiles for the means of the opposite rider types. This was also a striking finding. The average duration for a casual rider comes in at the 99th percentile for a member rider. Similarly, the average duration for a member rider is only the 29th percentile for a casual rider. This furthers the point that casual riders take much longer rides than member riders. The reason for this, I would presume, is that member riders are more likely to use the bikes for commuting short distances; since they are members they would use the system a lot. On the contrary, casual riders are more likely to use the bikes for longer, scenic rides. 
 
