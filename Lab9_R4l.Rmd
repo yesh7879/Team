@@ -17,7 +17,8 @@ library(ggplot2)
 library(OpenStreetMap)
 bikelocation <-read.csv("Nice_ride_data_2017_season/Nice_Ride_2017_Station_Locations.csv")
 bikehistory <-read.csv("Nice_ride_data_2017_season/Nice_ride_trip_history_2017_season.csv")
-
+Station1 = read.csv("Nice_ride_data_2017_season/Nice_Ride_2017_Station_Locations.csv", header = TRUE)
+Station2 = read.csv("Nice_ride_data_2017_season/Nice_ride_trip_history_2017_season.csv", header = TRUE)
 LAT1 <- 44.88     # Do not change
 LAT2 <- 45.05     # Do not change
 LON1 <- -93.35    # Do not change
@@ -43,19 +44,7 @@ map.latlon <- openproj(map, projection = "+proj=longlat +ellps=WGS84 +datum=WGS8
 5. We found that 1899 riders ride to Lake Street & Knox Ave S in May 2017.
 6. Most of people ride bikes in downtown Minneapolis on Labor Day than a random day, and most of the sample shows that they all start in the downtown area then they go to the countryside direction.
 
-###Team Part:
-```{r}
-Station4<- Station2%>%
-  filter(Month== 6:8)
-ggplot(data= Station4)+
-  geom_histogram(mapping = aes(x= Total.duration..Seconds., fill= Month), bins= 40)+
-  ggtitle('Time Duration For Each Bike Ride in May 2017')+
-  labs(y= "People", x= "Duration Time (sec)")+
-  xlim(c(0,5000))+
-  ylim(c(0,7500))
-```
-##Team Plot Findings:
-From the team plot you can see that there are more bikers biking in the month July. This makes sence becasue July is the hottest month of the year so more people go outside and exercise. 
+
 
 ##Individual Finding:
 
@@ -266,8 +255,7 @@ autoplot(map.latlon) + # Plots a map
 
 ```{r}
 
-Station1 = read.csv("Nice_ride_data_2017_season/Nice_Ride_2017_Station_Locations.csv", header = TRUE)
-Station2 = read.csv("Nice_ride_data_2017_season/Nice_ride_trip_history_2017_season.csv", header = TRUE)
+
 Station2<- Station2%>%
   separate(Start.date, into = c("Month", "day", "year"))
 Station3<- Station2%>%
@@ -412,6 +400,21 @@ autoplot(map.latlon)+
   ggtitle('Labor Day Ride & A Random Day Ride')
 
 ```
+
+
+###Team Part:
+```{r}
+Station4<- Station2%>%
+  filter(Month== 6:8)
+ggplot(data= Station4)+
+  geom_histogram(mapping = aes(x= Total.duration..Seconds., fill= Month), bins= 40)+
+  ggtitle('Time Duration For Each Bike Ride in May 2017')+
+  labs(y= "People", x= "Duration Time (sec)")+
+  xlim(c(0,5000))+
+  ylim(c(0,7500))
+```
+##Team Plot Findings:
+From the team plot you can see that there are more bikers biking in the month July. This makes sence becasue July is the hottest month of the year so more people go outside and exercise. 
 ###Who did what?
 
 Yen-Ting Shen: In this lab assignment, I use functions like mutate, left_join, separate, filter, quantile, and geom_segment. First, I used left_join to combine the data I want from the two datasets into one dataset. Then, I use functions like seperate, and filter to separate the date/ time into another new columns. In addition, I filtered out  the extreme data in Total.duration..Seconds. from 96.5 percentile to 100 percentile on the fourth of july since those data will hurt the accuracy of the day. Moreover, I use geom_segment to make a plot that shows the latitude and longitude on x and y axises. The interesting finding I found from my plot is that most of the people on the fourth of july uses the bike sharing service in the downtown of Minneapolis. Furthermore, the average use of bike time was significantly higher comparing than normal date. The average time use on the fourth of july in 2017 was 2646.488 seconds, and the normal date use was 1909.188 seconds. 
